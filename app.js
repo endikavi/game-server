@@ -11,6 +11,32 @@ var users = require('./routes/users');
 
 var app = express();
 
+// Constants //
+
+const jsonParser = bodyParser.raw();
+const urlencodedParser = bodyParser.urlencoded({extended: false})
+const mongodbRoute = 'mongodb://endika:endika@ds149865.mlab.com:49865/base_datos_aeg';
+const port = 3001;
+const mongodbOptions = {
+    useMongoClient: true,
+    socketTimeoutMS: 0,
+    keepAlive: true,
+    reconnectTries: 30
+};
+
+// MongoDB Connection //
+
+mongoose.Promise = global.Promise
+const db = mongoose.connect(mongodbRoute, mongodbOptions, (err) => {
+    if (err) {
+        return console.log(`Error al conectar a la base de datos: ${err}`)
+    }
+    app.listen(port, () => {
+        console.log(`Servidor up en ${port}`);
+    });
+    console.log(`Conexión correcta.`)
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
