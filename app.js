@@ -1,30 +1,23 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-
-var index = require('./routes/index');
-var users = require('./routes/users');
-
-
-var app = express();
-
-// Constants //
-
+const express = require('express');
+const app = express();
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const jsonParser = bodyParser.raw();
 const urlencodedParser = bodyParser.urlencoded({extended: false})
-const mongodbRoute = 'mongodb://endika:endika@ds149865.mlab.com:49865/base_datos_aeg';
+
+//endika_aeg // f*****234 //conexion a la base de datos
+
+const mongoose = require('mongoose');
+const mongodbRoute = 'mongodb://game-server:game-server@ds155299.mlab.com:55299/game-db';
 const port = 3001;
 const mongodbOptions = {
-    useMongoClient: true,
     socketTimeoutMS: 0,
     keepAlive: true,
     reconnectTries: 30
 };
-
-// MongoDB Connection //
 
 mongoose.Promise = global.Promise
 const db = mongoose.connect(mongodbRoute, mongodbOptions, (err) => {
@@ -34,8 +27,16 @@ const db = mongoose.connect(mongodbRoute, mongodbOptions, (err) => {
     app.listen(port, () => {
         console.log(`Servidor up en ${port}`);
     });
-    console.log(`Conexión correcta.`)
+    console.log(`Conexión a mongo correcta.`)
 });
+
+//Rutas del servidor
+
+const index = require('./routes/index');
+const users = require('./routes/users');
+
+app.use('/', index);
+app.use('/users', users);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -49,15 +50,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
+
+// cross-domain error fix //
+
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+})
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -69,5 +76,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-console.log('servidor ok')
+
 module.exports = app;
