@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const userCtrl = require('../controllers/userctrl')
 const bodyParser = require('body-parser');
-const session = require('express-session');
 
 router.use (bodyParser.json())
 router.use (bodyParser.urlencoded({extended: false}))
