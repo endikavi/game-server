@@ -6,7 +6,7 @@ exports.addUserSavedata = (req, res) => {
     
     console.log('Intento de añadir usuario');
     console.log(req.body);
-    /*
+
     const NewUser = new User();
     Object.assign(NewUser, req.body);
     NewUser.save()
@@ -20,33 +20,29 @@ exports.addUserSavedata = (req, res) => {
             res.send('Fallo al añadir usuario');
             console.log('Fallo al añadir usuario');
         })
-    */
 }
 
 //eliminar de la base de datos un usuario y su save
 
 exports.deleteUserSavedata = (req, res) => {
 	User.remove({
-		_id: req.params._id
+		Email: req.body.Email
 	}, function (err) {
 		if (err) return handleError(err);
 	});
-	console.log('Usuario eliminado ID: ' + req.params._id);
-	res.send('Usuario eliminado ID: ' + req.params._id);
+	console.log('Usuario eliminado email: ' + req.body.Email);
+	res.send('Usuario eliminado email: ' + req.body.Email);
 }
 
 //Actualizar info de un usuario y su save
 
 exports.updateUserSavedata = (req, res) => {
 	const Update = ({
-		dni: req.body.dni,
-		first_name: req.body.first_name,
-		last_name: req.body.last_name,
-		email: req.body.email
+		UserConf: req.body.UserConf,
 	});
 
 	User.update({
-		_id: req.params._id
+		Email: req.body.Email
 	}, Update, function (err) {
 		if (err) return handleError(err);
 	});
@@ -59,8 +55,11 @@ exports.updateUserSavedata = (req, res) => {
 //Recuperar info de un usuario y su save
 
 exports.getUserSavedata = (req, res) => {
+    
+    console.log(req.params.email);
+    
 	User.find({
-		Email: req.params.Email
+		Email: req.params.email
 	}).lean().exec(function (err, users) {
 		if (err) return console.error(err);
 		console.log('Busqueda de usuarios realizada,resultados obtenidos ' + users.length + ' usuarios');
