@@ -3,7 +3,8 @@ const mongoose = require ('mongoose');
 
 const UserSchema = mongoose.Schema({
     
-    UserConf: {type : Array , "default" : [], unique: false , required : false}
+    UserConf: {type : Array , unique : false , "default" : [] , unique: false , required : true},
+    check: {type: Boolean , unique : false , default : false , required : true}
     
 });
     
