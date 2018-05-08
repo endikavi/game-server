@@ -26,12 +26,12 @@ exports.addUserSavedata = (req, res) => {
 
 exports.deleteUserSavedata = (req, res) => {
 	User.remove({
-		Email: req.body.Email
+		uid: req.body.uid
 	}, function (err) {
 		if (err) return handleError(err);
 	});
-	console.log('Usuario eliminado email: ' + req.body.Email);
-	res.send('Usuario eliminado email: ' + req.body.Email);
+	console.log('Usuario eliminado uid: ' + req.body.uid);
+	res.send('Usuario eliminado uid: ' + req.body.uid);
 }
 
 //Actualizar info de un usuario y su save
