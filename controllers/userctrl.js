@@ -56,10 +56,10 @@ exports.updateUserSavedata = (req, res) => {
 
 exports.getUserSavedata = (req, res) => {
     
-    console.log(req.params.email);
+    console.log(req.params.id);
     
 	User.find({
-		Email: req.params.email
+		uid: req.params.id
 	}).lean().exec(function (err, users) {
 		if (err) return console.error(err);
 		console.log('Busqueda de usuarios realizada,resultados obtenidos ' + users.length + ' usuarios');

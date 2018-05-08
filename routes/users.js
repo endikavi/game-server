@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 router.use (bodyParser.json())
 router.use (bodyParser.urlencoded({extended: false}))
 
-router.get('/user/:email', userCtrl.getUserSavedata);
+router.get('/user/:id', userCtrl.getUserSavedata);
 
 router.post('/user', userCtrl.addUserSavedata);
 
