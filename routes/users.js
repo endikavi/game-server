@@ -14,6 +14,6 @@ router.put('/user', userCtrl.updateUserUid);
 
 router.patch('/user', userCtrl.updateUserSavedata);
 
-router.delete('/user', userCtrl.deleteUserSavedata);
+router.delete('/user/:id', userCtrl.deleteUserSavedata);
 
 module.exports = router;

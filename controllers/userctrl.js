@@ -5,8 +5,6 @@ const User = require('../models/user-schema');
 exports.addUserSavedata = (req, res) => {
     
     console.log('Intento de añadir usuario');
-    console.log(req.body);
-/*
     const NewUser = new User();
     Object.assign(NewUser, req.body);
     NewUser.save()
@@ -15,12 +13,13 @@ exports.addUserSavedata = (req, res) => {
             res.send(user);
             console.log('Añadido usuario:');
             console.log(user);
+			res.send(user);
         })
         .catch(error => {
             res.send('Fallo al añadir usuario');
             console.log('Fallo al añadir usuario');
-        })*/
-	res.send('');
+			res.send(error);
+        })
 }
 
 //eliminar de la base de datos un usuario y su save
