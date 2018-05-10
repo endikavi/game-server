@@ -33,7 +33,7 @@ exports.deleteUserSavedata = (req, res) => {
     console.log(req.params.id);
 	
 	User.remove({
-		uid: req..params.id
+		uid: req.params.id
 	}, function (err) {
 		if (err) return handleError(err);
 	});
