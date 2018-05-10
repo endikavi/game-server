@@ -5,6 +5,7 @@ const User = require('../models/user-schema');
 exports.addUserSavedata = (req, res) => {
     
     console.log('Intento de añadir usuario');
+	console.log(req.body);
     const NewUser = new User();
     Object.assign(NewUser, req.body);
     NewUser.save()
