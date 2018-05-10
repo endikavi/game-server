@@ -96,8 +96,9 @@ exports.getUserSavedata = (req, res) => {
         
 		if (err) return console.error(err);
 		console.log('SaveData obtenido');
+        if (users.length > 0){
 		res.send(users[0].UserConf);
-        
+        }
 	})
     
 }
