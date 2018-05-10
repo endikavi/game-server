@@ -32,14 +32,13 @@ exports.deleteUserSavedata = (req, res) => {
 	console.log('Intento de eliminar usuario');
     console.log(req.params.id);
 	
-	/*User.remove({
-		uid: req.body.uid
+	User.remove({
+		uid: req..params.id
 	}, function (err) {
 		if (err) return handleError(err);
 	});
-	console.log('Usuario eliminado uid: ' + req.body.uid);
-	res.send('Usuario eliminado uid: ' + req.body.uid);*/
-	res.send('');
+	console.log('Usuario eliminado uid: ' + req.params.id);
+	res.send('Usuario eliminado uid: ' + req.params.id);
 }
 
 //Actualizar info de un usuario y su save
