@@ -8,7 +8,7 @@ exports.addUserSavedata = (req, res) => {
 	console.log(req.body.UserConf);
     const NewUser = new User();
     Object.assign(NewUser, req.body);
-	NewUser.UserConf = req.body.UserConf;
+	NewUser.UserConf = JSON.parse(req.body.UserConf);
     NewUser.save()
 
         .then(user => {
