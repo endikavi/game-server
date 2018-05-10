@@ -10,7 +10,9 @@ router.get('/user/:id', userCtrl.getUserSavedata);
 
 router.post('/user', userCtrl.addUserSavedata);
 
-router.put('/user', userCtrl.updateUserSavedata);
+router.put('/user', userCtrl.updateUserUid);
+
+router.patch('/user', userCtrl.updateUserSavedata);
 
 router.delete('/user', userCtrl.deleteUserSavedata);
 
