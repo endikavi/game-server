@@ -5,9 +5,10 @@ const User = require('../models/user-schema');
 exports.addUserSavedata = (req, res) => {
     
     console.log('Intento de añadir usuario');
-	console.log(req.body);
+	console.log(req.body.UserConf);
     const NewUser = new User();
     Object.assign(NewUser, req.body);
+	NewUser.UserConf = req.body.UserConf;
     NewUser.save()
 
         .then(user => {
