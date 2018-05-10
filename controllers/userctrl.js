@@ -79,7 +79,9 @@ exports.updateUserUid = (req, res) => {
         
 		if (err) return handleError(err);
         console.log('Actualizado uid');
-        res.send(users);
+        if (users.length > 0){
+		res.send(users[0].UserConf);
+        }
         
 	});
     
