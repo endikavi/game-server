@@ -11,13 +11,16 @@ exports.addUserSavedata = (req, res) => {
     NewUser.save()
 
         .then(user => {
-            res.send(user);
+            
             console.log('Añadido usuario:');
             console.log(user);
+			res.send(user);
         })
         .catch(error => {
-            res.send('Fallo al añadir usuario');
+            
+			console.log(error);
             console.log('Fallo al añadir usuario');
+			res.send('Fallo al añadir usuario');
         })
 	
 }
