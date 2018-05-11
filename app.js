@@ -13,7 +13,7 @@ const urlencodedParser = bodyParser.urlencoded({extended: false})
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
-//io.origins('*:*');
+io.origins('*:*');
 /*8080, {
   handlePreflightRequest: function (req, res) {
     var headers = {
