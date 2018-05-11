@@ -8,28 +8,7 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.raw();
 const urlencodedParser = bodyParser.urlencoded({extended: false})
 
-//socket.io
 
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-
-io.on('connection', function(socket){
-    
-    console.log('a user connected');
-    
-    socket.on('chat', function(msg){
-        console.log('message: ' + msg);
-        io.emit('chat', msg);
-    });
-    
-    socket.on('disconnect', function(){
-        
-        console.log('user disconnected');
-        
-    });
-    
-});
-http.listen(3001)
 //endika_aeg // f*****234 //conexion a la base de datos
 
 const mongoose = require('mongoose');
@@ -46,10 +25,10 @@ mongoose.Promise = global.Promise
 const db = mongoose.connect(mongodbRoute, mongodbOptions, (err) => {
     if (err) {
         return console.log(`Error al conectar a la base de datos: ${err}`)
-    }/*
+    }
     app.listen(port, () => {
         console.log(`Servidor up en ${port}`);
-    });*/
+    });
     console.log(`Conexión a mongo correcta.`)
 });
 
@@ -98,6 +77,30 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+
+//socket.io
+
+const server = require('http').Server(app);
+const io = require('socket.io')(server,{transports:['websocket']});
+
+server.listen(8080)
+io.on('connection', function(socket){
+    
+    console.log('a user connected');
+    
+    socket.on('chat', function(msg){
+        console.log('message: ' + msg);
+        io.emit('chat', msg);
+    });
+    
+    socket.on('disconnect', function(){
+        
+        console.log('user disconnected');
+        
+    });
+    
 });
 
 module.exports = app;

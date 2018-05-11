@@ -24,7 +24,7 @@
 <script>
   $(function () {
       
-    var socket = io();
+    var socket = io({transport:["websocket"]);
       
     $('#chatbox').submit(function(){
         
