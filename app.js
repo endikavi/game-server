@@ -29,7 +29,7 @@ io.on('connection', function(socket){
     });
     
 });
-http(8080)
+http.listen(8080)
 //endika_aeg // f*****234 //conexion a la base de datos
 
 const mongoose = require('mongoose');
