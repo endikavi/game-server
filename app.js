@@ -13,6 +13,8 @@ const urlencodedParser = bodyParser.urlencoded({extended: false})
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
+io.origins('*:*');
+
 io.on('connection', function(socket){
     
     console.log('a user connected');
