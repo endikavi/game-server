@@ -29,7 +29,7 @@ io.on('connection', function(socket){
     });
     
 });
-http.listen(8080)
+http.listen(3001)
 //endika_aeg // f*****234 //conexion a la base de datos
 
 const mongoose = require('mongoose');
@@ -46,10 +46,10 @@ mongoose.Promise = global.Promise
 const db = mongoose.connect(mongodbRoute, mongodbOptions, (err) => {
     if (err) {
         return console.log(`Error al conectar a la base de datos: ${err}`)
-    }
+    }/*
     app.listen(port, () => {
         console.log(`Servidor up en ${port}`);
-    });
+    });*/
     console.log(`Conexión a mongo correcta.`)
 });
 
