@@ -38,7 +38,8 @@ const port = 3001;
 const mongodbOptions = {
     socketTimeoutMS: 0,
     keepAlive: true,
-    reconnectTries: 30
+    reconnectTries: 30,
+	useMongoClient: true
 };
 
 mongoose.Promise = global.Promise
