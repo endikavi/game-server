@@ -9,7 +9,7 @@ const jsonParser = bodyParser.raw();
 const urlencodedParser = bodyParser.urlencoded({extended: false})
 
 //socket.io
-
+/*
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
@@ -28,7 +28,7 @@ io.on('connection', function(socket){
         
     });
     
-});
+});*/
 
 //endika_aeg // f*****234 //conexion a la base de datos
 
@@ -82,7 +82,7 @@ app.use(function(req, res, next) {
 // cross-domain error fix //
 
 app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*:*');
+    res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
