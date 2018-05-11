@@ -83,7 +83,7 @@ app.use(function(err, req, res, next) {
 //socket.io
 
 const server = require('http').Server(app);
-const io = require('socket.io')(server,{transports:['websocket']});
+const io = require('socket.io')(app.listen(port),{transports:['websocket']});
 
 server.listen(8080)
 io.on('connection', function(socket){
