@@ -26,9 +26,9 @@ const db = mongoose.connect(mongodbRoute, mongodbOptions, (err) => {
     if (err) {
         return console.log(`Error al conectar a la base de datos: ${err}`)
     }
-    /*app.listen(port, () => {
+    app.listen(port, () => {
         console.log(`Servidor up en ${port}`);
-    });*/
+    });
     console.log(`Conexión a mongo correcta.`)
 });
 
@@ -81,9 +81,11 @@ app.use(function(err, req, res, next) {
 
 
 //socket.io
+/*
+const server = require('http').Server(app);
+const io = require('socket.io')(server,{transports:['websocket']});
 
-const io = require('socket.io')(app.listen(port),{transports:['websocket']});
-
+server.listen(8080)
 io.on('connection', function(socket){
     
     console.log('a user connected');
@@ -99,6 +101,6 @@ io.on('connection', function(socket){
         
     });
     
-});
+});*/
 
 module.exports = app;
