@@ -11,7 +11,10 @@ const urlencodedParser = bodyParser.urlencoded({extended: false})
 //socket.io
 
 const http = require('http').Server(app);
-const io = require('socket.io')(8080, {
+const io = require('socket.io')(http);
+
+io.origins('*:*');
+/*8080, {
   handlePreflightRequest: function (req, res) {
     var headers = {
 
@@ -23,10 +26,7 @@ const io = require('socket.io')(8080, {
     res.writeHead(200, headers);
     res.end();
   }
-});
-
-io.origins('*:*');
-
+}*/
 io.on('connection', function(socket){
     
     console.log('a user connected');
@@ -44,9 +44,9 @@ io.on('connection', function(socket){
     
 });
 
-/*http.listen(8080, function(){
+http.listen(8080, function(){
   console.log('listening on *:8080');
-});*/
+});
 
 //endika_aeg // f*****234 //conexion a la base de datos
 
