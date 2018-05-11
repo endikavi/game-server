@@ -13,7 +13,7 @@ const urlencodedParser = bodyParser.urlencoded({extended: false})
 
 const mongoose = require('mongoose');
 const mongodbRoute = 'mongodb://game-server:game-server@ds155299.mlab.com:55299/game-db';
-const port = 80;
+const port = 8080;
 const mongodbOptions = {
     socketTimeoutMS: 0,
     keepAlive: true,
@@ -85,7 +85,7 @@ app.use(function(err, req, res, next) {
 const server = require('http').Server(app);
 const io = require('socket.io')(server,{transports:['websocket']});
 
-server.listen(80)
+server.listen(8080)
 io.on('connection', function(socket){
     
     console.log('a user connected');
