@@ -14,11 +14,8 @@ const http = require('http').Server(app);
 const io = require('socket.io')(8080, {
   handlePreflightRequest: function (req, res) {
     var headers = {
-        
-        'Access-Control-Allow-Headers': '*',
-        'Access-Control-Allow-Methods':'*',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': true
+
+        'Access-Control-Allow-Origin': '*'
         
     };
     res.writeHead(200, headers);
