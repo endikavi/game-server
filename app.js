@@ -9,7 +9,7 @@ const jsonParser = bodyParser.raw();
 const urlencodedParser = bodyParser.urlencoded({extended: false})
 
 //socket.io
-/*
+
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
@@ -28,7 +28,7 @@ io.on('connection', function(socket){
         
     });
     
-});*/
+});
 
 //endika_aeg // f*****234 //conexion a la base de datos
 
