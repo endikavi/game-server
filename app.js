@@ -7,12 +7,27 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.raw();
 const urlencodedParser = bodyParser.urlencoded({extended: false})
-NODE_ENV=production;
+
+
 //socket.io
 
 const http = require('http').Server(app);
+
 const io = require('socket.io')(http);
-http.listen(8080);
+
+http.listen(8080, {
+  	handlePreflightRequest: function (req, res) {
+    	var headers = {
+
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Allow-Origin': req.headers.origin ,
+        'Access-Control-Allow-Credentials': true
+        
+    };
+    res.writeHead(200, headers);
+    res.end();
+  }
+});
 
 
 
