@@ -46,7 +46,7 @@ const db = mongoose.connect(mongodbRoute, mongodbOptions, (err) => {
     if (err) {
         return console.log(`Error al conectar a la base de datos: ${err}`)
     }
-    http.listen(port, () => {
+    app.listen(port, () => {
         console.log(`Servidor up en ${port}`);
     });
     console.log(`Conexión a mongo correcta.`)
