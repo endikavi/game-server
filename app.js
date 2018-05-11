@@ -27,6 +27,7 @@ const io = require('socket.io')(http);
     res.end();
   }
 }*/
+
 io.on('connection', function(socket){
     
     console.log('a user connected');
@@ -45,7 +46,7 @@ io.on('connection', function(socket){
 });
 
 http.listen(8080, function(){
-  console.log('listening on *:8080');
+  console.log('listening on :8080');
 });
 
 //endika_aeg // f*****234 //conexion a la base de datos
