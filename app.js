@@ -8,10 +8,11 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.raw();
 const urlencodedParser = bodyParser.urlencoded({extended: false})
 
-
 //socket.io
 
-/*
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
 io.on('connection', function(socket){
     
     console.log('a user connected');
@@ -27,7 +28,7 @@ io.on('connection', function(socket){
         
     });
     
-});*/
+});
 
 //endika_aeg // f*****234 //conexion a la base de datos
 
@@ -45,7 +46,7 @@ const db = mongoose.connect(mongodbRoute, mongodbOptions, (err) => {
     if (err) {
         return console.log(`Error al conectar a la base de datos: ${err}`)
     }
-    app.listen(port, () => {
+    http.listen(port, () => {
         console.log(`Servidor up en ${port}`);
     });
     console.log(`Conexión a mongo correcta.`)
