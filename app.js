@@ -11,41 +11,7 @@ const urlencodedParser = bodyParser.urlencoded({extended: false})
 
 //socket.io
 
-const http = require('http').Server(app);
-
-const io = require('socket.io')(http);
-
-http.listen(8080, {
-  	handlePreflightRequest: function (req, res) {
-    	var headers = {
-
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Allow-Origin': req.headers.origin ,
-        'Access-Control-Allow-Credentials': true
-        
-    };
-    res.writeHead(200, headers);
-    res.end();
-  }
-});
-
-
-
-//io.origins('*');
-/*8080, {
-  handlePreflightRequest: function (req, res) {
-    var headers = {
-
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Allow-Origin': req.headers.origin ,
-        'Access-Control-Allow-Credentials': true
-        
-    };
-    res.writeHead(200, headers);
-    res.end();
-  }
-}*/
-
+/*
 io.on('connection', function(socket){
     
     console.log('a user connected');
@@ -61,7 +27,7 @@ io.on('connection', function(socket){
         
     });
     
-});
+});*/
 
 //endika_aeg // f*****234 //conexion a la base de datos
 
@@ -115,8 +81,8 @@ app.use(function(req, res, next) {
 // cross-domain error fix //
 
 app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
+    res.header('Access-Control-Allow-Origin', '*:*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 })
