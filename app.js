@@ -11,9 +11,14 @@ const urlencodedParser = bodyParser.urlencoded({extended: false})
 //socket.io
 
 const http = require('http').Server(app);
+
+http.listen(4000, function(){
+  console.log('listening on :8080');
+});
+
 const io = require('socket.io')(http);
 
-io.origins('*');
+//io.origins('*');
 /*8080, {
   handlePreflightRequest: function (req, res) {
     var headers = {
@@ -43,10 +48,6 @@ io.on('connection', function(socket){
         
     });
     
-});
-
-io.listen(8080, function(){
-  console.log('listening on :8080');
 });
 
 //endika_aeg // f*****234 //conexion a la base de datos
