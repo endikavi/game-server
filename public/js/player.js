@@ -199,8 +199,8 @@ Character.prototype.canMoveTo = function(d, x, y) {
     		//console.log('Moviendose');
             this.startSprites();
             pasoscount ++;
-			if(multiplayerOn){socket.emit('walking',[x,y])};
-	        return true;
+			if(multiplayerOn){socket.emit('walking',[x,y])}else{return true};
+	       	
 };
 
 Character.prototype.canMoveUp		= function() { return this.canMoveTo("u", this.tileFrom[0], this.tileFrom[1]-1); };
