@@ -1,8 +1,10 @@
 var socket;
 
 function multiplayer(){
+	
+	console.log('multijugador comenzado')
     
-    socket = io("https://gserver.herokuapp.com:8080");
+    socket = io("https://gioserver.herokuapp.com",{transports:["websocket"]});
     
     socket.emit('id', "1");
     
