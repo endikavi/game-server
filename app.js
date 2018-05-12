@@ -8,12 +8,11 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.raw();
 const urlencodedParser = bodyParser.urlencoded({extended: false})
 
-
 //endika_aeg // f*****234 //conexion a la base de datos
 
 const mongoose = require('mongoose');
 const mongodbRoute = 'mongodb://game-server:game-server@ds155299.mlab.com:55299/game-db';
-const port = 8080;
+const port = process.env.PORT || 3001;
 const mongodbOptions = {
     socketTimeoutMS: 0,
     keepAlive: true,
@@ -78,29 +77,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
-//socket.io
-/*
-const server = require('http').Server(app);
-const io = require('socket.io')(server,{transports:['websocket']});
-
-server.listen(8080)
-io.on('connection', function(socket){
-    
-    console.log('a user connected');
-    
-    socket.on('chat', function(msg){
-        console.log('message: ' + msg);
-        io.emit('chat', msg);
-    });
-    
-    socket.on('disconnect', function(){
-        
-        console.log('user disconnected');
-        
-    });
-    
-});*/
 
 module.exports = app;
