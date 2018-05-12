@@ -24,7 +24,7 @@
 <script>
   $(function () {
       
-    var socket = io({transports:["websocket"]});
+    var socket = io("https://gioserver.herokuapp.com",{transports:["websocket"]});
       
     $('#chatbox').submit(function(){
         
