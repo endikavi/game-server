@@ -13,7 +13,8 @@ function multiplayer(){
     socket.on('walking', function(msg){
         
         console.log('cambiando posicion');
-		player.placeAt(msg[0], msg[1]);
+		if (player.tileFrom != msg){player.placeAt(msg[0], msg[1]);}
+		
         
     })
     
