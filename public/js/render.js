@@ -119,11 +119,36 @@ function drawGame() {
 
                     this.direction	= directions.right;
 
-                    if     ((keysDown[38] && player.canMoveUp()) || (joystick.deltaY() < -35 && player.canMoveUp()))		{ player.moveUp(gameTime); }
-                    else if((keysDown[40] && player.canMoveDown()) || joystick.deltaY() > 35 && player.canMoveDown()) 		{ player.moveDown(gameTime); }
-                    else if((keysDown[37] && player.canMoveLeft()) || joystick.deltaX() < -30 && player.canMoveLeft())		{ player.moveLeft(gameTime); }
-                    else if((keysDown[39] && player.canMoveRight()) || joystick.deltaX() > 30 && player.canMoveRight())		{ player.moveRight(gameTime); }
-                    else if(keysDown[38] || joystick.up())			{ player.direction = directions.up; }
+                    if((keysDown[38] && player.canMoveUp()) || (joystick.deltaY() < -35 && player.canMoveUp())){
+						if(multiplayerOn){
+							moving = true;
+							socket.emit('walking',[player.tileFrom[0],player.tileFrom[1]-1]);
+						}else{
+							player.moveUp(gameTime);
+						}
+					}else if((keysDown[40] && player.canMoveDown()) || joystick.deltaY() > 35 && player.canMoveDown()){
+						if(multiplayerOn){
+							moving = true;
+							socket.emit('walking',[player.tileFrom[0],player.tileFrom[1]+1]);
+						}else{						
+							player.moveDown(gameTime);
+						} 
+					}else if((keysDown[37] && player.canMoveLeft()) || joystick.deltaX() < -30 && player.canMoveLeft()){
+						if(multiplayerOn){
+							moving = true;
+							socket.emit('walking',[player.tileFrom[0]-1,player.tileFrom[1]]);
+						}else{						
+							player.moveLeft(gameTime);
+						}
+					}else if((keysDown[39] && player.canMoveRight()) || joystick.deltaX() > 30 && player.canMoveRight()){
+						if(multiplayerOn){
+							moving = true;
+							socket.emit('walking',[player.tileFrom[0]+1,player.tileFrom[1]]);
+						}else{							 
+							player.moveRight(gameTime);
+						}
+					}
+                    else if(keysDown[38] || joystick.up())          {player.direction = directions.up; }
                     else if(keysDown[40] || joystick.down())		{ player.direction = directions.down; }
                     else if(keysDown[37] || joystick.left())		{ player.direction = directions.left; }
                     else if(keysDown[39] || joystick.right())		{ player.direction = directions.right; }

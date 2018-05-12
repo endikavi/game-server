@@ -1,5 +1,6 @@
 var socket;
 var multiplayerOn;
+var moving = false;
 function multiplayer(){
 	
 	multiplayerOn = true
@@ -13,8 +14,28 @@ function multiplayer(){
     socket.on('walking', function(msg){
         
         console.log('cambiando posicion');
-		if (player.tileFrom != msg){player.placeAt(msg[0], msg[1]);}
-		
+
+		if (player.tileFrom[0] < msg[0] && moving){
+			player.tileTo[0]+=1;
+			player.timeMoved = gameTime;
+			player.direction = directions.right;
+			moving = false;
+		}else if(player.tileFrom[0] > msg[0] && moving){
+			player.tileTo[0]-=1
+			player.timeMoved = gameTime;
+			player.direction = directions.left;
+			moving = false;}
+		if (player.tileFrom[1] < msg[1] && moving){
+			player.tileTo[1]+=1
+			player.timeMoved = gameTime;
+			player.direction = directions.down;
+			moving = false;
+		}else if(player.tileFrom[1] > msg[1] && moving){
+			player.tileTo[1]-=1
+			player.timeMoved = gameTime;
+			player.direction = directions.up;
+			moving = false;
+		}
         
     })
     

@@ -197,9 +197,10 @@ Character.prototype.canMoveTo = function(d, x, y) {
         }
 	}
     		//console.log('Moviendose');
-            this.startSprites();
+	
+			this.startSprites();
             pasoscount ++;
-			if(multiplayerOn){socket.emit('walking',[x,y])}else{return true};
+			return true
 	       	
 };
 
