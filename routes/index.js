@@ -6,4 +6,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Servidor del juego' });
 });
 
+router.get('/game', function(req, res, next) {
+  res.render('game', { title: 'cliente del juego' });
+});
+
 module.exports = router;
