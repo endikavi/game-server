@@ -66,8 +66,8 @@ function addCard(title,text) {
 
 function mainMenuControlls() {
     
-	document.removeEventListener("backbutton", mainMenu, false);   
-	document.addEventListener("backbutton", exitFromApp, false);
+	//document.removeEventListener("backbutton", mainMenu, false);   
+	//document.addEventListener("backbutton", exitFromApp, false);
 
 	$$("#StartGame").on("click",function () {
 
