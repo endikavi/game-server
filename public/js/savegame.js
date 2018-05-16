@@ -20,10 +20,10 @@ function appInit(){
 
 function TakeMobileInfo() {
     
-    UserConf[1].mobileid = device.uuid
+    UserConf[1].mobileid = "pc"+Date.now()
     
-    UserConf[1].mobileinfo = {
-        
+    UserConf[1].mobileinfo = {}
+        /*
         Fabricante:     device.manufacturer,
         Cordova:        device.cordova,
         Modelo:         device.model,
@@ -32,7 +32,7 @@ function TakeMobileInfo() {
         Emulacion:      device.isVirtual,
         Serial:         device.serial,
         
-    }
+    }*/
     
 }
 
@@ -58,9 +58,9 @@ var UserConf = [
                 
         {
             
-            username: undefined,
-            multiplayerid: undefined,
-            mobileid: undefined,
+            username: "pc"+Date.now(),
+            multiplayerid: "pc"+Date.now(),
+            mobileid: "pc"+Date.now(),
             mobileinfo: undefined
         
         },
