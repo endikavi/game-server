@@ -26,6 +26,7 @@ function mainMenu() {
     mainMenuControlls();
     menuSound.play();
     mapSound.stop();
+	
 }
 
 function newUserMenu() {
@@ -59,58 +60,176 @@ function addCard(title,text) {
     
 	$$('.card').html('<div class="card-header"><p class="popup-title">' + title + '</p></div><div class="card-content card-content-padding pop-up"><p class="popup-text">' + text + '</p></div><div id="gamescreen"></div>');
     
-    $$('.card-header').on('click', function () {$$('.card').html('')})
+    //$$('.card-header').on('click', function () {$$('.card').html('')})
     
 }
 
 function mainMenuControlls() {
     
-document.removeEventListener("backbutton", mainMenu, false);   
-document.addEventListener("backbutton", exitFromApp, false);
-    
-$$("#StartGame").on("click",function () {
-    
-    addGameCanvas();
-                                                      
-});
-    
-$$('#Multi').on('click', function () {addCard('multijugador','este es el menu del multi')})
+	document.removeEventListener("backbutton", mainMenu, false);   
+	document.addEventListener("backbutton", exitFromApp, false);
 
-$$('#ContinueGame').on('click', function () {addCard('Continuar','este es el menu para elegir partida guardada')})
-    
-$$('#User').on('click',  newUserMenu)
+	$$("#StartGame").on("click",function () {
 
-$$('#Menu').on('click', function () {configMenu})
+		startGameMenu();
 
-$$('#Retos').on('click', function () {addCard('Retos','este es el menu de retos<hr><p class="segmented segmented-raised"><button class="button button-outline">Mapa 1</button><button class="button button-outline">Mapa 2</button><button class="button button-outline">Mapa 3</button><button class="button button-outline">Mapa 4</button></p><p class="segmented segmented-raised"><button class="button button-outline">Mapa 5</button><button class="button button-outline">Mapa 6</button><button class="button button-outline">Mapa 7</button><button class="button button-outline">Mapa 8</button></p>')})
+	});
+
+	$$('#Multi').on('click', function () {
+
+		multiplayerMenu();
+
+	})
+
+	$$('#ContinueGame').on('click', function () {
+
+		loadGameMenu();
+
+	})
+
+	$$('#User').on('click',  function () {
+
+		userMenu();
+
+	})
+
+	$$('#Menu').on('click', function () {
+
+		configMenu();
+
+	})
+
+	$$('#Retos').on('click', function () {
+
+		retosMenu();
+
+	})
     
 }
 
-function resetUserMenu (){
-    
-    addCard('Login','<button  id="Register" class="button button-outline button-register" type="buttom" >Registrarte</button> <button id="Login" class="button button-outline button-register-google" type="buttom">Ya tengo cuenta</button>')
-    
-    $$('#Register').on('click', registerMenu)
-    $$('#Login').on('click', loginMenu)
-    
+function startGameMenu(){
+	
+	
+	
 }
 
-function registerMenu (){
-    
-    addCard('Login','<button class="button button-outline" id="Reset" type="buttom">Volver</button><div class="item-input-wrap"><input type="text" name="e" class="dropdown-item " id="Email" placeholder="Email address" required pattern="^[^@]+@[^@]+\.[^@]{2,3}$" minlength="8" maxlength="40" required  required><span class="input-clear-button"></span></div><div class="item-input-wrap"><input type="text" name="u" class="dropdown-item " id="Username"  placeholder="Username" pattern="[A-z0-9À-ž]{3,15}$" minlength="3" maxlength="15" ><span class="input-clear-button"></span></div><div class="item-input-wrap"><input type="password" name="p" class="dropdown-item " id="Password"  placeholder="Password" required pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,40}" minlength="8" maxlength="40" required> <button id="Login" class="button button-outline button-register-google" type="buttom">Entrar</button>')
-    
-    $$('#Reset').on('click', resetUserMenu)
-    $$('#Login').on('click', logIn)
-    
+function loadGameMenu(){
+	
+	
+	
 }
 
-function loginMenu (){
+function multiplayerMenu(){
+	
+	addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white" id="seeGC">Chat Global</button><button type="button" class="button col button-round btn color-white"id="seeR">Salas</button><button type="button" class="button col button-round btn color-white"id="seeRC">Chat de sala</button><button type="button" class="button col button-round btn color-white"id="exitCard">X</button></div>','<div class="list relleno"><ul id="GCmessages" ></ul></div><div class="item-input-wrap" id="multiInput"><input type="text" id="m" autocomplete="off" /><button type="button" class="button col button-round btn color-white"id="sendGC">Send</button></div>');
+	
+	for(var c = 0;c < chats.global.length;c++){
+		
+		printGlobalChat(chats.global[c])
+		
+	}
     
-    addCard('Login','<button class="button button-outline" id="Reset" type="buttom">Volver</button><div class="item-input-wrap"><input type="text" name="e" class="dropdown-item " id="Email" placeholder="Email address" required pattern="^[^@]+@[^@]+\.[^@]{2,3}$" minlength="8" maxlength="40" required  required></div><div class="item-input-wrap"><input type="text" name="u" class="dropdown-item " id="Username"  placeholder="Username" pattern="[A-z0-9À-ž]{3,15}$" minlength="3" maxlength="15" ></div><div class="item-input-wrap"><input type="password" name="p" class="dropdown-item " id="Password"  placeholder="Password" required pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,40}" minlength="8" maxlength="40" required> <button id="Login" class="button button-outline button-register-google" type="buttom">Entrar</button>')
+    $$('#exitCard').on('click', function () {$$('.card').html('')})
+	
+	$$('#sendGC').on('click' , function(){
+        
+		sendGlobalChat();
+        
+    });
+	
+    $$('#seeR').on('click' , function(){
+        
+		seeRoomList();
+        
+    });
+    $$('#seeRC').on('click' , function(){
+        
+		seeRoomChat();
+        
+    });
+}
+
+function configMenu(){
+	
+	multiplayer();
+	
+}
+
+function seeRoomList(){
+	
+    addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white" id="seeGC">Chat Global</button><button type="button" class="button col button-round btn color-white"id="seeR">Salas</button><button type="button" class="button col button-round btn color-white"id="seeRC">Chat de sala</button><button type="button" class="button col button-round btn color-white"id="exitCard">X</button></div>','<div class="list relleno"><ul id="GCmessages" ></ul></div><div class="item-input-wrap" id="multiInput"><input type="text" id="m" autocomplete="off" /><button type="button" class="button col button-round btn color-white"id="sendGC">Send</button></div>');
+	
+	for(var c = 0;c < rooms.list.length;c++){
+		
+		printRoom(rooms.list[c])
+		
+	}
     
-    $$('#Reset').on('click', resetUserMenu)
-    $$('#Login').on('click', signIn)
+    $$('#exitCard').on('click', function () {$$('.card').html('')})
+	
+	$$('#sendGC').on('click' , function(){
+        
+		createRoom();
+        
+    });
+	
+    $$('#seeGC').on('click' , function(){
+        
+		multiplayerMenu();
+        
+    });
+    $$('#seeRC').on('click' , function(){
+        
+		seeRoomChat();
+        
+    });
+	
+}
+
+function seeRoomChat(){
+	
+    addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white" id="seeGC">Chat Global</button><button type="button" class="button col button-round btn color-white"id="seeR">Salas</button><button type="button" class="button col button-round btn color-white"id="seeRC">Chat de sala</button><button type="button" class="button col button-round btn color-white"id="exitCard">X</button></div>','<div class="list relleno"><ul id="GCmessages" ></ul></div><div class="item-input-wrap"><input type="text" id="m" autocomplete="off" /><button type="button" class="button col button-round btn color-white"id="sendGC">Send</button></div>');
+	
+	for(var c = 0;c < chats.room.length;c++){
+		
+		printRoomChat(chats.room[c])
+		
+	}
     
+    $$('#exitCard').on('click', function () {$$('.card').html('')})
+	
+	$$('#sendGC').on('click' , function(){
+        
+		sendRoomChat();
+        
+    });
+	
+    $$('#seeGC').on('click' , function(){
+        
+		multiplayerMenu();
+        
+    });
+    $$('#seeR').on('click' , function(){
+        
+		seeRoomList();
+        
+    });
+	
+}
+
+function userMenu(){
+	
+	$$('.card').html('<div class="card-header"><p class="popup-title">Bienvenido al juego</p></div><div class="card-content card-content-padding pop-up"><p class="popup-text">Para empezar a usar el multijugador y la funcion de datos en la nube da un nombre de usuario para identificarte,puedes activarlo o desactivarlo en ajustes mas adelante.</p> <hr><div class="item-inner"><div class="item-input-wrap"><div class="inputbox"><input type="text" class="inputname" placeholder="Nombre de usuario" value="'+ (UserConf[1].username || "") +'"><span class="input-clear-button resetinput"></span></div><hr></div></div></div><div id="gamescreen"><div class="block"><div class="row"><button class="button col" id="newUser">Listo</button><button class="button col" id="notUser">No me interesa</button></div></div></div>');
+    
+    $$('#notUser').on('click', function () {mainMenu();});
+    $$('#newUser').on('click', function () {setNewUser();});
+	
+}
+
+function retosMenu(){
+	
+	addCard('Retos','este es el menu de retos<hr><p class="segmented segmented-raised"><button class="button button-outline">Mapa 1</button><button class="button button-outline">Mapa 2</button><button class="button button-outline">Mapa 3</button><button class="button button-outline">Mapa 4</button></p><p class="segmented segmented-raised"><button class="button button-outline">Mapa 5</button><button class="button button-outline">Mapa 6</button><button class="button button-outline">Mapa 7</button><button class="button button-outline">Mapa 8</button></p>');
+	
 }
 
 
