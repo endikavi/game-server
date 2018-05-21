@@ -75,7 +75,7 @@ function multiplayer(){
         }
 	})
     
-    socket.on('changedRoom', function(msg){
+    socket.on('changeRoom', function(msg){
         console.log('sala cambiada');
         rooms.list[msg[0]] = msg[1]
         if(UserConf[1].roomid == undefined){
