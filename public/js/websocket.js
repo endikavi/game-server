@@ -22,7 +22,7 @@ function multiplayer(){
     socket.on('walking', function(msg){
         
         console.log(msg[0]+' cambiando posicion a '+msg[1]);
-        if(coop[msg[0]] == undefined){
+        if(coop.list[msg[0]] == undefined){
             console.log('creando avatar');
             coop.list[msg[0]].character = new MapObject("coop",1);
             
