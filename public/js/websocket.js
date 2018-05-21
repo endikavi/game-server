@@ -128,7 +128,7 @@ function printYourRoom(msg){
         
         startMG();
         
-    }
+    })
 	
 }
 
@@ -182,5 +182,11 @@ function createRoom(){
 function exitRoom(){
 	
 	socket.emit('exitRoom', [UserConf[1].roomid, UserConf[1].multiplayerid, UserConf[1].username]);
+    
+}
+    
+function startMG(){
+    
+    
     
 }
