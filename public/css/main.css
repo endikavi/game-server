@@ -19,7 +19,7 @@
 
 .inputname {
     
-    height:75px;
+    height: 10vh;
     width:100%;
     font-size: 12;
     
@@ -89,7 +89,7 @@
 }
 
 #ContinueGame {
-	background-image: url("msgbox.png");
+	
 	position: absolute;
     height: 10%;
 	width: 44%;
@@ -186,4 +186,59 @@
 	width: 100%;
 	bottom: 0px;
 	
+}
+
+#m{
+	position: absolute;
+	display: block;
+	bottom: 2%;
+	border-color: black;
+	border-style: solid;
+	background: rgb(130, 224, 255);
+	height: 13vh;
+	width: 70%;
+}
+
+#sendGC { position: absolute;bottom: 3%; right: 5%; width: 20%;
+	background-image: linear-gradient(to bottom, green, darkgreen);
+	border-color: black;
+  	border-style: solid}
+#messages li:nth-child(odd) { background: #eee; }
+.relleno{
+	display: block;
+  	width: 95%;
+  	height: 55vh;
+	padding-bottom: 10vh;
+  	overflow-y: scroll;
+}
+
+.segmento{
+    
+    width: 100%;
+    
+}
+
+#seeGC{
+    
+    width: 30%;
+    font-size: 15px;
+    
+}
+#seeR{
+    
+    width: 25%;
+    font-size: 15px;
+    
+}
+#seeRC{
+    
+    width: 30%;
+    font-size: 15px;
+    
+}
+#exitCard{
+    
+    width: 6%;
+    font-size: 20px;
+    
 }

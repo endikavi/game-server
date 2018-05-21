@@ -158,11 +158,12 @@ function configMenu(){
 function seeRoomList(){
 	
     addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white" id="seeGC">Chat Global</button><button type="button" class="button col button-round btn color-white"id="seeR">Salas</button><button type="button" class="button col button-round btn color-white"id="seeRC">Chat de sala</button><button type="button" class="button col button-round btn color-white"id="exitCard">X</button></div>','<div class="list relleno"><ul id="GCmessages" ></ul></div><div class="item-input-wrap" id="multiInput"><input type="text" id="m" autocomplete="off" /><button type="button" class="button col button-round btn color-white"id="sendGC">Send</button></div>');
-	
-	for(var c = 0;c < rooms.list.length;c++){
+	console.log('pintando salas')
+    console.log(rooms.list)
+	for(var c = 0;c < Object.size(rooms.list);c++){
 		
 		printRoom(rooms.list[c])
-		
+		console.log('sala')
 	}
     
     $$('#exitCard').on('click', function () {$$('.card').html('')})
@@ -232,7 +233,4 @@ function retosMenu(){
 	
 }
 
-
 mainMenu();
-
-
