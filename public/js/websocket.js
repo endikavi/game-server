@@ -101,7 +101,7 @@ function printRoom(id,msg){
 	        
     $$('#GCmessages').append('<li><div class="item-content"><div class="item-inner resizable"><div class="item-title">Sala '+ id +':<div class="item-header"><p class="popup-text">'+msg.chief+' </p></div><div class="item-footer">'+msg.people.length+'/4 </div></div><div class="item-after"><button type="button" class="button col button-round btn color-white"id="'+ id +'">Entrar</button></div></div></div></li>');
     
-    $$('#' + id).on('click',function(){
+    $$('#' + id).on('click',function(this){
         
         console.log(this.attr('id'));
         //UserConf[1].roomid = $$('#m').val();
