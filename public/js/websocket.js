@@ -21,12 +21,15 @@ function multiplayer(){
     socket.on('walking', function(msg){
         
         console.log(msg[0]+' cambiando posicion a '+msg[1]);
-        if(typeof eval(msg[0]) === 'undefined' ){
+        
+        if( players.list[msg[0]].character == undefined ){
             
             console.log('creando avatar para jugador ' + msg[0] );
             eval(msg[0]) = new MapObject("coop",1);
+            players.list[msg[0]].character == true;
             
         }
+        
         eval(msg[0]).placeAt(3, 3);
     })
 	
