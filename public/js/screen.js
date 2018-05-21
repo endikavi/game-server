@@ -163,7 +163,7 @@ function seeRoomList(){
   		if (rooms.list.hasOwnProperty(nombre)) {
 			
     		console.log(rooms.list[nombre]);
-			printRoom(rooms.list[nombre])
+			printRoom(nombre,rooms.list[nombre])
   		}
 	}
 	
