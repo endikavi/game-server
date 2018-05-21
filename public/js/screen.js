@@ -52,6 +52,7 @@ function setNewUser(){
         UserConf[1].multiplayerid=username+device.uuid+(device.isVirtual ? 1 : 0);
         localStorage.setItem("savedata", JSON.stringify(UserConf));
         mainMenu();
+        
     }
     
 }
