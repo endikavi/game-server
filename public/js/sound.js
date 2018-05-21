@@ -46,3 +46,5 @@ function sound(loop,src) {
     mapSound = new sound(true,"music/map.mp3");
     hitSound = new sound(false,"music/hit.mp3");
     hurraSound = new sound(false,"music/hurra.mp3");
+
+mainMenu();
