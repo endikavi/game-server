@@ -21,7 +21,7 @@ function multiplayer(){
     
     socket.on('walking', function(msg){
         
-        console.log(msg[0]+' cambiando posicion a 'msg[1]);
+        console.log(msg[0]+' cambiando posicion a '+msg[1]);
         if(players[msg[0]].character == undefined){
             
         players[msg[0]].character = new MapObject("coop",1);
