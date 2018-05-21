@@ -22,12 +22,14 @@ function multiplayer(){
         
         console.log(msg[0]+' cambiando posicion a '+msg[1]);
         if(msg[0] != UserConf[1].multiplayerid){
+            
             if( players.list[msg[0]].character == undefined ){
 
                 console.log('creando avatar para jugador ' + msg[0] );
                 players.list[msg[0]].character = new MapObject({name:"coop",info:false,nt:6});
 
             }
+            
             players.list[msg[0]].character.placeAt(msg[1], msg[2]);
         }
     })
