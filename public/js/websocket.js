@@ -5,8 +5,8 @@ var chats = {};
 var players = {};
 var rooms = {};
 rooms.list ={};
-chats.room = {};
-chats.global = {};
+chats.room = [];
+chats.global = [];
 
 
 function multiplayer(){
