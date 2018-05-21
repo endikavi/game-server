@@ -7,8 +7,7 @@ var rooms = {};
 rooms.list ={};
 chats.room = [];
 chats.global = [];
-var coop = {}
-coop.list ={};
+
 function multiplayer(){
 	
 	multiplayerOn = true
@@ -22,10 +21,10 @@ function multiplayer(){
     socket.on('walking', function(msg){
         
         console.log(msg[0]+' cambiando posicion a '+msg[1]);
-        if(coop.list[msg[0]] == undefined){
+        if(eval(msg[0]) == undefined){
             
             console.log('creando avatar para jugador ' + msg[0] );
-            coop.list[msg[0]].character = new MapObject("coop",1);
+            eval(msg[0]) = new MapObject("coop",1);
             
         }
         players[msg[0]].character.placeAt(3, 3);
