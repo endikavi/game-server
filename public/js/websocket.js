@@ -103,7 +103,8 @@ function printRoom(id,msg){
     
     $$('#' + id).on('click',function (e){
 		
-		console.log(this.attr('id'));
+		console.log($$(this).attr('id'));
+		enterRoom($$(this).attr('id'));
 		
 	})
 	
