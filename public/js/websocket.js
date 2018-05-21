@@ -24,7 +24,9 @@ function multiplayer(){
         console.log(msg[0]+' cambiando posicion a '+msg[1]);
         if(players[msg[0]].character == undefined){
             
-        players[msg[0]].character = new MapObject("coop",1);
+            players[msg[0]] = {};
+            console.log('creando avatar');
+            players[msg[0]].character = new MapObject("coop",1);
             
         }
         players[msg[0]].character.placeAt(3, 3);
