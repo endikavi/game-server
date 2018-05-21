@@ -21,16 +21,15 @@ function multiplayer(){
     socket.on('walking', function(msg){
         
         console.log(msg[0]+' cambiando posicion a '+msg[1]);
-        
-        if( players.list[msg[0]].character == undefined ){
-            
-            console.log('creando avatar para jugador ' + msg[0] );
-            eval(msg[0]) = new MapObject("coop",1);
-            players.list[msg[0]].character == true;
-            
+        if(msg[0] != UserConf[1].multiplayerid){
+            if( players.list[msg[0]].character == undefined ){
+
+                console.log('creando avatar para jugador ' + msg[0] );
+                players.list[msg[0]].character = new MapObject({name:"coop",info:false,nt:6});
+
+            }
+            players.list[msg[0]].character.placeAt(msg[1], msg[2]);
         }
-        
-        eval(msg[0]).placeAt(3, 3);
     })
 	
 	socket.on('playersList', function(msg){
