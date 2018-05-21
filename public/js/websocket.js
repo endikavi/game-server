@@ -69,7 +69,6 @@ function multiplayer(){
     
     socket.on('newRoom', function(msg){
         console.log('nueva sala creada');
-        console.log(msg);
         rooms.list[msg[0]] = msg[1]
         if(UserConf[1].roomid == undefined){
             printRoom(msg[0],msg[1]);
@@ -85,7 +84,8 @@ function multiplayer(){
 	})
     
     socket.on('enterRoom', function(msg){
-        console.log('nuevo miembro en la sala'+ msg[0]);
+        
+        console.log('nuevo miembro en la sala');
         
         if(UserConf[1].roomid != undefined){
             printYourRoom(msg);
