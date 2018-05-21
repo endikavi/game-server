@@ -161,9 +161,9 @@ function seeRoomList(){
     
 	for (var nombre in rooms.list) {
   		if (rooms.list.hasOwnProperty(nombre)) {
-			
-    		console.log(rooms.list[nombre]);
-			printRoom(nombre,rooms.list[nombre])
+			if(rooms.list[nombre] != null && rooms.list[nombre] != undefined){
+				printRoom(nombre,rooms.list[nombre]);
+			}
   		}
 	}
 	
