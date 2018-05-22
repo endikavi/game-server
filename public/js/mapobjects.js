@@ -38,7 +38,14 @@ var objectTypes = {
     6 : {
 		name : "npc",
 		sprite : new Sprite(charlieTileset,[{x:0,y:640,w:64,h:64}]),
-		offset : [0,0],
+		offset : [-13,-27],
+		collision : objectCollision.solid,
+		zIndex : 1
+	},
+    7 : {
+		name : "cpc",
+		sprite : new Sprite(playerTwoTileset,[{x:0,y:640,w:64,h:64}]),
+		offset : [-13,-27],
 		collision : objectCollision.solid,
 		zIndex : 1
 	}
