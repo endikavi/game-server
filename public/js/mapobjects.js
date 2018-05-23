@@ -60,6 +60,8 @@ function MapObject(dat) {
 	this.y		= 0;
 	this.type	= dat.nt || 0;
 	this.offset	= [0,0];
+	this.sprite = undefined;
+	this.direction = "d";
 	
 }
 
@@ -103,10 +105,90 @@ if(this.info!=false && this.talking >= 0){
 
 MapObject.prototype.processMovement = function() {	
 	
-	if(this.offset[0] > 0 ) {this.offset[0]=(this.offset[0]-2.25)}
-	if(this.offset[0] < 0 ) {this.offset[0]=(this.offset[0]+2.25)}
-	if(this.offset[1] > 0 ) {this.offset[1]=(this.offset[1]-2.25)}
-	if(this.offset[1] < 0 ) {this.offset[1]=(this.offset[1]+2.25)}
+	if((this.offset[0] > 8 || this.offset[1] > 8 || this.offset[0] < -8 || this.offset[1] < -8) && this.name == "coop" ){
+		
+		if(this.direction == "u"){
+
+			o.sprite = new Sprite(playerTileset,[
+				{x:0,y:512,w:64,h:64},
+				{x:64,y:512,w:64,h:64},
+				{x:128,y:512,w:64,h:64},
+				{x:192,y:512,w:64,h:64},
+				{x:256,y:512,w:64,h:64},
+				{x:320,y:512,w:64,h:64},
+				{x:384,y:512,w:64,h:64},
+				{x:448,y:512,w:64,h:64},
+				{x:512,y:512,w:64,h:64}
+			])
+			
+		}
+		
+		if(this.direction == "r"){
+
+			o.sprite = new Sprite(playerTileset,[
+				{x:0,y:704,w:64,h:64},
+				{x:64,y:704,w:64,h:64},
+				{x:128,y:704,w:64,h:64},
+				{x:192,y:704,w:64,h:64},
+				{x:256,y:704,w:64,h:64},
+				{x:320,y:704,w:64,h:64},
+				{x:384,y:704,w:64,h:64},
+				{x:448,y:704,w:64,h:64},
+				{x:512,y:704,w:64,h:64}
+			])
+			
+		}
+		
+		if(this.direction == "d"){
+
+			o.sprite = new Sprite(playerTileset,[
+				{x:0,y:640,w:64,h:64},
+				{x:64,y:640,w:64,h:64},
+				{x:128,y:640,w:64,h:64},
+				{x:192,y:640,w:64,h:64},
+				{x:256,y:640,w:64,h:64},
+				{x:320,y:640,w:64,h:64},
+				{x:384,y:640,w:64,h:64},
+				{x:448,y:640,w:64,h:64},
+				{x:512,y:640,w:64,h:64}
+			])
+			
+		}
+		
+		if(this.direction == "l"){
+
+			o.sprite = new Sprite(playerTileset,[
+				{x:0,y:576,w:64,h:64},
+				{x:64,y:576,w:64,h:64},
+				{x:128,y:576,w:64,h:64},
+				{x:192,y:576,w:64,h:64},
+				{x:256,y:576,w:64,h:64},
+				{x:320,y:576,w:64,h:64},
+				{x:384,y:576,w:64,h:64},
+				{x:448,y:576,w:64,h:64},
+				{x:512,y:576,w:64,h:64}
+			])
+			
+		}
+		
+	}else if(this.name == "coop"){
+		if(this.direction == "u"){this.sprite = new Sprite(playerTileset,[{x:0,y:512,w:64,h:64}])}
+		if(this.direction == "r"){this.sprite = new Sprite(playerTileset,[{x:0,y:704,w:64,h:64}])}
+		if(this.direction == "d"){this.sprite = new Sprite(playerTileset,[{x:0,y:640,w:64,h:64}])}
+		if(this.direction == "l"){this.sprite = new Sprite(playerTileset,[{x:0,y:576,w:64,h:64}])}
+	}
+	if(this.offset[0] > 0.5 ) {
+		this.offset[0]-=(this.offset[0]/framesLastSecond)*3.5
+	}
+	if(this.offset[0] < -0.5 ) {
+		this.offset[0]-=(this.offset[0]/framesLastSecond)*3.5
+	}
+	if(this.offset[1] > 0.5 ) {
+		this.offset[1]-=(this.offset[1]/framesLastSecond)*3.5
+	}
+	if(this.offset[1] < -0.5 ) {
+		this.offset[1]-=(this.offset[1]/framesLastSecond)*3.5
+	}
 	
 };
 

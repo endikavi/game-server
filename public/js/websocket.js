@@ -32,11 +32,11 @@ function multiplayer(){
             }
             
             o.objectCanMoveTo(msg[1], msg[2]);
-            
-            if(msg[3]=="u"){o.offset[1]=+22.5}
-            if(msg[3]=="d"){o.offset[1]=-22.5}
-            if(msg[3]=="l"){o.offset[0]=+22.5}
-            if(msg[3]=="r"){o.offset[0]=-22.5}
+            o.direction = msg[3];
+            if(msg[3]=="u"){o.offset[1]+=40}
+            if(msg[3]=="d"){o.offset[1]-=40}
+            if(msg[3]=="l"){o.offset[0]+=40}
+            if(msg[3]=="r"){o.offset[0]-=40}
             
         }
         
