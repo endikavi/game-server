@@ -187,6 +187,9 @@ Character.prototype.canMoveTo = function(d, x, y) {
             	if(d == "d")		{o.objectCanMoveTo(x,y+1);o.offset[1]=-22.5}
             	if(d == "l")		{o.objectCanMoveTo(x-1,y);o.offset[0]=+22.5}
             	if(d == "r")		{o.objectCanMoveTo(x+1,y);o.offset[0]=-22.5}
+                if(multiplayerOn){
+                    socket.emit('pushing',[x,y,d]);    
+                }
 				
 			}
 			
@@ -270,6 +273,10 @@ Character.prototype.pickUp = function() {
 					player.moveUp(gameTime);
 					player.direction = directions.down
 					o.objectCanMoveTo(this.tileFrom[0], this.tileFrom[1])
+                    if(multiplayerOn){
+                        socket.emit('walking',[this.tileFrom[0],this.tileFrom[1]-1,"u"]);
+                        socket.emit('pushing',[this.tileFrom[0],this.tileFrom[1]+1,"u"]);
+                    }
 					
 				}
 				
@@ -279,6 +286,10 @@ Character.prototype.pickUp = function() {
 					player.moveDown(gameTime);
 					player.direction = directions.up
 					o.objectCanMoveTo(this.tileFrom[0], this.tileFrom[1])
+                    if(multiplayerOn){
+                    socket.emit('walking',[this.tileFrom[0],this.tileFrom[1]+1,"d"]); 
+                    socket.emit('pushing',[this.tileFrom[0],this.tileFrom[1]-1,"d"]);
+                    }
 					
 				}
 				
@@ -288,6 +299,10 @@ Character.prototype.pickUp = function() {
 					player.moveLeft(gameTime);
 					player.direction = directions.right
 					o.objectCanMoveTo(this.tileFrom[0], this.tileFrom[1])
+                    if(multiplayerOn){
+                        socket.emit('walking',[this.tileFrom[0]-1,this.tileFrom[1],"l"]); 
+                        socket.emit('pushing',[this.tileFrom[0]+1,this.tileFrom[1],"l"]);
+                    }
 					
 				}
 				
@@ -297,6 +312,10 @@ Character.prototype.pickUp = function() {
 					player.moveRight(gameTime);
 					player.direction = directions.left
 					o.objectCanMoveTo(this.tileFrom[0], this.tileFrom[1])
+                    if(multiplayerOn){
+                        socket.emit('walking',[this.tileFrom[0]+1,this.tileFrom[1],"r"]);
+                        socket.emit('pushing',[this.tileFrom[0]-1,this.tileFrom[1],"r"]);
+                    }
 					
 				}
 			}else if(objectTypes[mapTileData.map[lookingTo()].object.type].info!=false){

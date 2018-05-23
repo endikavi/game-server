@@ -1,6 +1,5 @@
 var socket;
 var multiplayerOn;
-var moving = false;
 var chats = {};
 var players = {};
 var rooms = {};
@@ -46,14 +45,12 @@ function multiplayer(){
         
         if(msg[0] != UserConf[1].multiplayerid){
 
-            var o = mapTileData.map[msg[1],msg[2]].object;
+            var o = mapTileData.map[toIndex(msg[1],msg[2])].object;
 
-            o.objectCanMoveTo(msg[3], msg[4]);
-
-            if(msg[5]=="u"){o.offset[1]=+22.5}
-            if(msg[5]=="d"){o.offset[1]=-22.5}
-            if(msg[5]=="l"){o.offset[0]=+22.5}
-            if(msg[5]=="r"){o.offset[0]=-22.5}
+            	if(msg[3] == "u")		{o.objectCanMoveTo(msg[1],msg[2]-1);o.offset[1]=+17.5}
+            	if(msg[3] == "d")		{o.objectCanMoveTo(msg[1],msg[2]+1);o.offset[1]=-17.5}
+            	if(msg[3] == "l")		{o.objectCanMoveTo(msg[1]-1,msg[2]);o.offset[0]=+17.5}
+            	if(msg[3] == "r")		{o.objectCanMoveTo(msg[1]+1,msg[2]);o.offset[0]=-17.5}
             
         }  
         

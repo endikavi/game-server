@@ -121,25 +121,21 @@ function drawGame() {
 
                     if((keysDown[38] && player.canMoveUp()) || (joystick.deltaY() < -35 && player.canMoveUp())){
 						if(multiplayerOn){
-							moving = true;
 							socket.emit('walking',[player.tileFrom[0],player.tileFrom[1]-1,"u"]);
 						}
 						player.moveUp(gameTime);
 					}else if((keysDown[40] && player.canMoveDown()) || joystick.deltaY() > 35 && player.canMoveDown()){
 						if(multiplayerOn){
-							moving = true;
 							socket.emit('walking',[player.tileFrom[0],player.tileFrom[1]+1,"d"]);
 						}					
 						player.moveDown(gameTime);
 					}else if((keysDown[37] && player.canMoveLeft()) || joystick.deltaX() < -30 && player.canMoveLeft()){
 						if(multiplayerOn){
-							moving = true;
 							socket.emit('walking',[player.tileFrom[0]-1,player.tileFrom[1],"l"]);
 						}					
 						player.moveLeft(gameTime);
 					}else if((keysDown[39] && player.canMoveRight()) || joystick.deltaX() > 30 && player.canMoveRight()){
 						if(multiplayerOn){
-							moving = true;
 							socket.emit('walking',[player.tileFrom[0]+1,player.tileFrom[1],"r"]);
 						}						 
 						player.moveRight(gameTime);
