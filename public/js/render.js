@@ -220,9 +220,7 @@ function drawGame() {
 					if(o!=null && objectTypes[o.type].zIndex==1 && z==1 && (y*tileH) <= player.position[1]+5) {
 
 						o.processMovement();
-
 						ot = objectTypes[o.type];
-
 						if(o.sprite == undefined){
 							ot.sprite.draw(gameTime,
 								viewport.offset[0] + (x*tileW) + ot.offset[0] + o.offset[0],
@@ -247,9 +245,9 @@ function drawGame() {
 					if(o!=null && objectTypes[o.type].zIndex==1 && z==1 && (y*tileH) >= player.position[1]) {
 
 						o.processMovement();
-
+                        ot = objectTypes[o.type];
 						if(o.sprite == undefined){
-                            ot = objectTypes[o.type];
+                            
 							ot.sprite.draw(gameTime,
 								viewport.offset[0] + (x*tileW) + ot.offset[0] + o.offset[0],
 								viewport.offset[1] + (y*tileH) + ot.offset[1] + o.offset[1]);
