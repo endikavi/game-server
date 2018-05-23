@@ -65,6 +65,13 @@ function multiplayer(){
         console.log(msg);
         
     })
+    
+    socket.on('newPlayer', function(msg){
+        
+        players.list = msg;
+        console.log(msg);
+        
+    })
 	
 	socket.on('roomsList', function(msg){
         
