@@ -42,17 +42,17 @@ function multiplayer(){
     })
     
     socket.on('pushing', function(msg){
-        
-        if(msg[0] != UserConf[1].multiplayerid){
 
-            var o = mapTileData.map[toIndex(msg[1],msg[2])].object;
+		if(msg[0] != UserConf[1].multiplayerid){
 
-            	if(msg[3] == "u")		{o.objectCanMoveTo(msg[1],msg[2]-1);o.offset[1]=+17.5}
-            	if(msg[3] == "d")		{o.objectCanMoveTo(msg[1],msg[2]+1);o.offset[1]=-17.5}
-            	if(msg[3] == "l")		{o.objectCanMoveTo(msg[1]-1,msg[2]);o.offset[0]=+17.5}
-            	if(msg[3] == "r")		{o.objectCanMoveTo(msg[1]+1,msg[2]);o.offset[0]=-17.5}
-            
-        }  
+				var o = mapTileData.map[toIndex(msg[1],msg[2])].object;
+
+				if(msg[3] == "u")		{o.objectCanMoveTo(msg[1],msg[2]-1,true);o.offset[1]=+17.5}
+				if(msg[3] == "d")		{o.objectCanMoveTo(msg[1],msg[2]+1,true);o.offset[1]=-17.5}
+				if(msg[3] == "l")		{o.objectCanMoveTo(msg[1]-1,msg[2],true);o.offset[0]=+17.5}
+				if(msg[3] == "r")		{o.objectCanMoveTo(msg[1]+1,msg[2],true);o.offset[0]=-17.5}
+
+		}  
         
     })
 	

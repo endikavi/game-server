@@ -110,13 +110,9 @@ function drawGame() {
     elapsed = now - then;
 	
 	if (elapsed > fpsInterval) {
-		
-		if (elapsed > fpsInterval/4){
-            
-            //setTimeout(function(){
                 
                 if(!player.processMovement(gameTime) && gameSpeeds[currentSpeed].mult!=0){
-
+					stop=false;
                     this.direction	= directions.right;
 
                     if((keysDown[38] && player.canMoveUp()) || (joystick.deltaY() < -35 && player.canMoveUp())){
@@ -146,16 +142,25 @@ function drawGame() {
                     else if(keysDown[39] || joystick.right())		{ player.direction = directions.right; }
                     else if(keysDown[80]) 							{ player.pickUp(); }
 
-                }else if(keysDown[80]) { 
-
-                    player.pickUp();
-                    keysDown[80]=false; 
+                }else {
+					if(stop){
+						if(keysDown[80]){
+							player.pickUp();
+							keysDown[80]=false;
+						}
+					}else{
+						
+					setTimeout(function(){
+                    	stop=true;
+					}, 2000);
+						
+					}
 
                 }
                 
-           // }, 0);
+            //}, 0);
             
-		}
+		//}
 
         then = now - (elapsed % fpsInterval);
 
