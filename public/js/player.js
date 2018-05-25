@@ -263,7 +263,7 @@ Character.prototype.pickUp = function() {
 				
 				return false;
 				
-			}else if(objectTypes[mapTileData.map[lookingTo()].object.type].collision==objectCollision.push){
+			}else if(objectTypes[mapTileData.map[lookingTo()].object.type].collision==objectCollision.push && !keysDown[37] && !keysDown[38] && !keysDown[39] && !keysDown[40] && joystick.deltaX() == 0 && joystick.deltaY() == 0 ){
 				
 				var o = mapTileData.map[lookingTo()].object;
 				

@@ -61,14 +61,12 @@ function addCard(title,text) {
     
 	$$('.card').html('<div class="card-header"><p class="popup-title">' + title + '</p></div><div class="card-content card-content-padding pop-up"><p class="popup-text">' + text + '</p></div><div id="gamescreen"></div>');
     
-    //$$('.card-header').on('click', function () {$$('.card').html('')})
-    
 }
 
 function mainMenuControlls() {
     
-	//document.removeEventListener("backbutton", mainMenu, false);   
-	//document.addEventListener("backbutton", exitFromApp, false);
+	document.removeEventListener("backbutton", mainMenu, false);   
+	document.addEventListener("backbutton", exitFromApp, false);
 
 	$$("#StartGame").on("click",function () {
 
