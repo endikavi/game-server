@@ -199,6 +199,41 @@
 	width: 70%;
 }
 
+#sens{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+#opac{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+#resu{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+#options{
+	display: block;
+	border-color: black;
+	border-style: solid;
+    border-width: 2px;
+    padding-bottom: 200px;
+	height: auto;
+	width: 80%;
+    margin: auto;
+}
+.opcion{
+	display: block;
+	border-color: black;
+	border-radius: 50%;
+	border-style: solid;
+	background: rgb(130, 224, 255);
+	height: 24%;
+	width: 70%;
+}
 #sendGC { position: absolute;bottom: 3%; right: 5%; width: 20%;
 	background-image: linear-gradient(to bottom, green, darkgreen);
 	border-color: black;

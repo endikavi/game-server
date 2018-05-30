@@ -48,5 +48,5 @@ function resetCanvas() {
     currentSpeed = 0;
 	
 	clearInterval(movement);
-	
+	clearInterval(drawGameInterval);
 }

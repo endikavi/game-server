@@ -51,12 +51,14 @@ var frameCount;
 var fps, fpsInterval, startTime, now, then, elapsed;
 
 var tileIndex;
+var sensi;
+var movement;
 
-var movement
+var drawGameInterval;
 
 function renderGame() {
 	
-	fpsInterval = 1000 / 60;
+	fpsInterval = UserConf[0].fps;
     then = Date.now();
     startTime = then;
     
@@ -85,38 +87,52 @@ function renderGame() {
 		}
 		if(e.keyCode==80 || e.keyCode==69) { keysDown[e.keyCode] = false; }
 	});
-
-	viewport.screen = [800,450];
-    setTimeout(function (){preLoadSprites()},0);
+	
+	sensi = UserConf[0].sens;
+    console.log(UserConf[0].resolutionX+" "+UserConf[0].resolutionY)
+	viewport.screen = [UserConf[0].resolutionX,UserConf[0].resolutionY];
 	mapTileData.buildMapFromData(gameMap, mapW, mapH);
 	mapTileData.addRoofs(roofList);
-	setTimeout(function (){mapTileData.preLoad()},0);
 	populateMap();
+	preRender = setInterval(function (){
+            preLoadSprites();
+            mapTileData.preLoad();
+			clearInterval(preRender)
+    },0);
 	
-	requestAnimationFrame(drawGame);
 	
-	movement = setInterval(function () {
+	if(UserConf[0].performance){
+        drawGameInterval = setInterval(drawGame,0)
+        movement = setInterval(gameControlls, 0);
+    }else{
+        requestAnimationFrame(drawGame);
+        requestAnimationFrame(gameControlls);
+    }
+};
+
+
+function gameControlls(){
 
 		if (!player.processMovement(gameTime) && gameSpeeds[currentSpeed].mult != 0) {
 			stop = false;
 			this.direction = directions.right;
 
-			if ((keysDown[38] && player.canMoveUp()) || (joystick.deltaY() < -35 && player.canMoveUp())) {
+			if ((keysDown[38] && player.canMoveUp()) || (joystick.deltaY() < -sensi && player.canMoveUp() && joystick.up())) {
 				if (multiplayerOn) {
 					socket.emit('walking', [player.tileFrom[0], player.tileFrom[1] - 1, "u"]);
 				}
 				player.moveUp(gameTime);
-			} else if ((keysDown[40] && player.canMoveDown()) || joystick.deltaY() > 35 && player.canMoveDown()) {
+			} else if ((keysDown[40] && player.canMoveDown()) || joystick.deltaY() > sensi && player.canMoveDown() && joystick.down()) {
 				if (multiplayerOn) {
 					socket.emit('walking', [player.tileFrom[0], player.tileFrom[1] + 1, "d"]);
 				}
 				player.moveDown(gameTime);
-			} else if ((keysDown[37] && player.canMoveLeft()) || joystick.deltaX() < -30 && player.canMoveLeft()) {
+			} else if ((keysDown[37] && player.canMoveLeft()) || joystick.deltaX() < -sensi && player.canMoveLeft() && joystick.left()) {
 				if (multiplayerOn) {
 					socket.emit('walking', [player.tileFrom[0] - 1, player.tileFrom[1], "l"]);
 				}
 				player.moveLeft(gameTime);
-			} else if ((keysDown[39] && player.canMoveRight()) || joystick.deltaX() > 30 && player.canMoveRight()) {
+			} else if ((keysDown[39] && player.canMoveRight()) || joystick.deltaX() > sensi && player.canMoveRight() && joystick.right()) {
 				if (multiplayerOn) {
 					socket.emit('walking', [player.tileFrom[0] + 1, player.tileFrom[1], "r"]);
 				}
@@ -139,10 +155,10 @@ function renderGame() {
 			player.pickUp();
 			
 		}
-		
-	}, 0);
-	
-};
+        if(!UserConf[0].performance){
+            requestAnimationFrame(gameControlls);
+        }
+}
 
 function drawGame() {
 	
@@ -150,7 +166,6 @@ function drawGame() {
 	
 	if(!tilesetLoaded && !musicLoaded) {alert("Failed loading some assets. "); ctx=null; mainMenu(); return; }
 		
-	requestAnimationFrame(drawGame);
 	currentFrameTime = Date.now();
 	now = currentFrameTime;
 	timeElapsed = currentFrameTime - lastFrameTime;
@@ -171,9 +186,6 @@ function drawGame() {
 		l = mapTileData.levels;
 		ye = viewport.endTile[1];
 		xe = viewport.endTile[0];
-
-		
-		
 		
 		ctx1.clearRect(0, 0, viewport.screen[0], viewport.screen[1]);
 		
@@ -219,7 +231,7 @@ function drawGame() {
 					if(o!=null && objectTypes[o.type].zIndex==1 && z==1 && (y*tileH) <= player.position[1]+5) {
 
 						o.processMovement();
-						ot = objectTypes[o.type];
+                        ot = objectTypes[o.type];
 						if(o.sprite == undefined){
 							ot.sprite.draw(gameTime,
 								viewport.offset[0] + (x*tileW) + ot.offset[0] + o.offset[0],
@@ -246,7 +258,6 @@ function drawGame() {
 						o.processMovement();
                         ot = objectTypes[o.type];
 						if(o.sprite == undefined){
-                            
 							ot.sprite.draw(gameTime,
 								viewport.offset[0] + (x*tileW) + ot.offset[0] + o.offset[0],
 								viewport.offset[1] + (y*tileH) + ot.offset[1] + o.offset[1]);
@@ -277,10 +288,8 @@ function drawGame() {
 				}
 			}
 		}
-	
 	}
-	
-	
+		
 	if(sec!=currentSecond) {
 		
 		currentSecond = sec;
@@ -291,18 +300,21 @@ function drawGame() {
 		ctx3.clearRect(0, 0, viewport.screen[0]/2, viewport.screen[1]/2);
 	    ctx3.fillStyle = "#ff0000";
 		ctx3.textAlign = "left";
-        tileIndex = parseInt(player.tileFrom[1]) * mapW + parseInt(player.tileFrom[0]);
+        //tileIndex = parseInt(player.tileFrom[1]) * mapW + parseInt(player.tileFrom[0]);
     	ctx3.fillText("FPS: " + framesLastSecond, 10, 15);
-        ctx3.fillText("Game speed: " + gameSpeeds[currentSpeed].name, 10, 40);
+        /*ctx3.fillText("Game speed: " + gameSpeeds[currentSpeed].name, 10, 40);
         ctx3.fillText(player.position[1] + 'X: '+ player.tileFrom[0] +' Y: '+ player.tileFrom[1] +' Indice: '+ tileIndex, 10, 60);
-        ctx3.fillText("Steps: " + pasoscount, 10, 80);
+        ctx3.fillText("Steps: " + pasoscount, 10, 80);*/
 		
-	}
-	else { frameCount++; }
+	}else { frameCount++; }
 
 	lastFrameTime = currentFrameTime;
 		
 	}
+	
+    if(!UserConf[0].performance){
+        requestAnimationFrame(drawGame);
+    }
 	
 }
 

@@ -1,4 +1,36 @@
+
+var pc = true;
+
 function appInit(){
+	
+    pc = false;
+    
+	userdata=localStorage.getItem('savedata');
+    userdata=JSON.parse(userdata);
+    
+    if( userdata != null){
+        
+        UserConf = userdata;
+		
+        if (UserConf[0].online) {
+			
+			multiplayer();
+			
+		}
+		
+		mainMenu();
+		
+    }else{
+        
+        TakeMobileInfo();
+        localStorage.setItem("savedata", JSON.stringify(UserConf));
+        newUserMenu();
+
+    }
+	
+}
+
+function pcInit(){
 	
 	userdata=localStorage.getItem('savedata');
     userdata=JSON.parse(userdata);
@@ -6,24 +38,34 @@ function appInit(){
     if( userdata != null){
         
         UserConf = userdata;
+		
+        if (UserConf[0].online) {
+			
+			multiplayer();
+			
+		}
+		
 		mainMenu();
-        
+		
     }else{
         
-        TakeMobileInfo();
-        localStorage.setItem("savedata", JSON.stringify(UserConf));
-        newUserMenu();
+        UserConf[1].mobileid = "pc"+Date.now()
+    
+        UserConf[1].mobileinfo = {}
         
+        localStorage.setItem("savedata", JSON.stringify(UserConf));
+        
+        newUserMenu();
+
     }
 	
 }
-
 function TakeMobileInfo() {
     
-    UserConf[1].mobileid = "pc"+Date.now()
+    UserConf[1].mobileid = device.uuid
     
-    UserConf[1].mobileinfo = {}
-        /*
+    UserConf[1].mobileinfo = {
+        
         Fabricante:     device.manufacturer,
         Cordova:        device.cordova,
         Modelo:         device.model,
@@ -32,46 +74,69 @@ function TakeMobileInfo() {
         Emulacion:      device.isVirtual,
         Serial:         device.serial,
         
-    }*/
+    }
     
 }
 
 function vibrate() {
-    
-	console.log(navigator.vibrate(2000));
-    
+    if (UserConf[0].vibrate) {
+		console.log(navigator.vibrate(40));
+	}
+}
+
+function vibrateLong() {
+    if (UserConf[0].vibrate) {
+		console.log(navigator.vibrate(2000));
+	}
+}
+
+function startGame(savename){
+	
+	UserConf.push({
+		
+            lvl: 1,
+            name:savename,
+            inventory:"",
+            actualmap: 0001,
+            actualpositionx: 3,
+            actualpositiony: 3
+        
+	})
+	
+	addGameCanvas();
+	
+}
+
+function loadGame(){
+	
+	
+	
 }
 
 var UserConf = [
     
         {
         
-            controllsR: 0,
-            controllsL: 0,
-            music: 0,
-            vibrate: 0,
-            performance: 0,
-            online: 0,
-            
+            controlls: 1,
+            music: true,
+            vibrate: true,
+			performance: true,
+            fps: 60,
+			resolutionX: 800,
+			resolutionY: 450,
+            online: true,
+            opac: 50,
+            sens: 50, 
             
         },
                 
         {
             
-            username: "pc"+Date.now(),
-            multiplayerid: "pc"+Date.now(),
-            mobileid: "pc"+Date.now(),
+            username: undefined,
+            multiplayerid: undefined,
+            roomid: undefined,
+            mobileid: undefined,
             mobileinfo: undefined
-        
-        },
-        
-        {
-            lvl: 1,
-            name:undefined,
-            inventory:"",
-            actualmap: 0001,
-            actualpositionx: 3,
-            actualpositiony: 3
         
         }
     

@@ -183,10 +183,10 @@ Character.prototype.canMoveTo = function(d, x, y) {
             
 			if(keysDown[80]){
 				
-            	if(d == "u")		{o.objectCanMoveTo(x,y-1);o.offset[1]=+22.5}
-            	if(d == "d")		{o.objectCanMoveTo(x,y+1);o.offset[1]=-22.5}
-            	if(d == "l")		{o.objectCanMoveTo(x-1,y);o.offset[0]=+22.5}
-            	if(d == "r")		{o.objectCanMoveTo(x+1,y);o.offset[0]=-22.5}
+            	if(d == "u")		{o.objectCanMoveTo(x,y-1);o.offset[1]+=22.5}
+            	if(d == "d")		{o.objectCanMoveTo(x,y+1);o.offset[1]-=22.5}
+            	if(d == "l")		{o.objectCanMoveTo(x-1,y);o.offset[0]+=22.5}
+            	if(d == "r")		{o.objectCanMoveTo(x+1,y);o.offset[0]-=22.5}
                 if(multiplayerOn){
                     socket.emit('pushing',[x,y,d]);    
                 }
@@ -246,10 +246,9 @@ Character.prototype.moveDirection = function(d, t) {
 
 Character.prototype.pickUp = function() {
 	
-	keysDown[80] = false;
+	//keysDown[80] = false;
 	
-	if(this.tileTo[0]!=this.tileFrom[0] ||
-		this.tileTo[1]!=this.tileFrom[1]) {
+	if(this.tileTo[0]!=this.tileFrom[0] || this.tileTo[1]!=this.tileFrom[1]) {
 		
 		return false;
 		
@@ -269,7 +268,7 @@ Character.prototype.pickUp = function() {
 				
 				if(player.direction == directions.down && player.canMoveUp()) {
 					
-					o.offset[1]=+45
+					o.offset[1]+=45
 					player.moveUp(gameTime);
 					player.direction = directions.down
 					o.objectCanMoveTo(this.tileFrom[0], this.tileFrom[1])
@@ -282,7 +281,7 @@ Character.prototype.pickUp = function() {
 				
             	if(this.direction == directions.up && player.canMoveDown()) {
 					
-					o.offset[1]=-45
+					o.offset[1]-=45
 					player.moveDown(gameTime);
 					player.direction = directions.up
 					o.objectCanMoveTo(this.tileFrom[0], this.tileFrom[1])
@@ -295,7 +294,7 @@ Character.prototype.pickUp = function() {
 				
             	if(this.direction == directions.right && player.canMoveLeft())	{
 					
-					o.offset[0]=+45
+					o.offset[0]+=45
 					player.moveLeft(gameTime);
 					player.direction = directions.right
 					o.objectCanMoveTo(this.tileFrom[0], this.tileFrom[1])
@@ -308,7 +307,7 @@ Character.prototype.pickUp = function() {
 				
             	if(this.direction == directions.left && player.canMoveRight()) {
 					
-					o.offset[0]=-45
+					o.offset[0]-=45
 					player.moveRight(gameTime);
 					player.direction = directions.left
 					o.objectCanMoveTo(this.tileFrom[0], this.tileFrom[1])
@@ -318,8 +317,8 @@ Character.prototype.pickUp = function() {
                     }
 					
 				}
-			}else if(objectTypes[mapTileData.map[lookingTo()].object.type].info!=false){
-                     
+			}else if(objectTypes[mapTileData.map[lookingTo()].object.type].info != false){
+				
                     var o = mapTileData.map[lookingTo()].object;
                     o.talk();
                      

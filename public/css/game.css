@@ -122,7 +122,8 @@ body,html{
     background-position: center; 
     background-size: 100%;
     transform: rotate(-45deg);
-	background-image: url("arrows.png"); 
+	background-image: url("arrows.png");
+	z-index: 5;
 	
 }
 
@@ -145,7 +146,16 @@ body,html{
 	top:65.5%;
 	left:3.5%;
     transform: rotate(180deg);
+    z-index: 5;
 		
+}
+
+#lefty {
+	
+	background: transparent;
+    border: none !important;
+    font-size:0;
+	
 }
 
 .styck {
@@ -161,25 +171,42 @@ body,html{
 
 .right {
 	
+	background: transparent;
+    border: none !important;
+    font-size:0;
 	top:39%;
 	left:25%;
+    z-index: 5;
 	
 }
 
 .up {
+	
+	background: transparent;
+    border: none !important;
+    font-size:0;
 	transform: rotate(270deg);	
 	top:33.4%;
-	left:6.7%;	
+	left:6.7%;
+    z-index: 5;
 }
 
 .down {
+	
+	background: transparent;
+    border: none !important;
+    font-size:0;
 	transform: rotate(90deg);	
 	top:71%;
-	left:21.7%;	
+	left:21.7%;
+	z-index: 5;
 }
 	
 .action {
 	
+	background: transparent;
+    border: none !important;
+    font-size:0;
 	position: absolute;
     z-index: 5;
 	top:60%;

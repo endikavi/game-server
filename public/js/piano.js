@@ -203,3 +203,5 @@ function startCombat (){
 	});
 	
 }
+
+if (pc){pcInit();}

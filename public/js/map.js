@@ -55,17 +55,20 @@ function setMap() {
     
 }
 
-async function changeMap(id){
-		
+function changeMap(id){
+		ctx.clearRect(0, 0, viewport.screen[0], viewport.screen[1]);
+		ctx1.clearRect(0, 0, viewport.screen[0], viewport.screen[1]);
+		ctx2.clearRect(0, 0, viewport.screen[0], viewport.screen[1]);
 		mapTileData.preLoaded = false;
 		mapId=id
         setMap();
         mapTileData.buildMapFromData(gameMap, mapW, mapH);
         mapTileData.addRoofs(roofList);
         populateMap();
-        setTimeout(function (){
+        preRender = setInterval(function (){
             preLoadSprites();
-            mapTileData.preLoad();               
+            mapTileData.preLoad();
+			clearInterval(preRender) 
         },0);
 
 }
