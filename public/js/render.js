@@ -102,7 +102,8 @@ function renderGame() {
 	
 	if(UserConf[0].performance){
         drawGameInterval = setInterval(drawGame,0)
-        movement = setInterval(gameControlls, fpsInterval);
+        //movement = setInterval(gameControlls, fpsInterval);
+        requestAnimationFrame(gameControlls);
         if(UserConf[0].fps==1000/30){
             if(pc){
                 gameSpeeds = [
