@@ -100,13 +100,46 @@ function renderGame() {
 			clearInterval(preRender)
     },0);
 	
-	
 	if(UserConf[0].performance){
         drawGameInterval = setInterval(drawGame,0)
-        movement = setInterval(gameControlls, 0);
+        movement = setInterval(gameControlls, fpsInterval);
+        if(UserConf[0].fps==1000/30){
+            if(pc){
+                gameSpeeds = [
+                   {name:"Normal", mult:0.3},
+                   {name:"Slow", mult:0.3},
+                   {name:"Fast", mult:3},
+                   {name:"Paused", mult:0}
+                ];                  
+            }else{
+                gameSpeeds = [
+                   {name:"Normal", mult:0.4},
+                   {name:"Slow", mult:0.3},
+                   {name:"Fast", mult:3},
+                   {name:"Paused", mult:0}
+                ];       
+            }
+        }
     }else{
         requestAnimationFrame(drawGame);
         requestAnimationFrame(gameControlls);
+        if(UserConf[0].fps==1000/30){
+            if(pc){
+                gameSpeeds = [
+                   {name:"Normal", mult:0.6},
+                   {name:"Slow", mult:0.3},
+                   {name:"Fast", mult:3},
+                   {name:"Paused", mult:0}
+                ];                  
+            }else{
+                gameSpeeds = [
+                   {name:"Normal", mult:0.7},
+                   {name:"Slow", mult:0.3},
+                   {name:"Fast", mult:3},
+                   {name:"Paused", mult:0}
+                ];                  
+            }               
+        }
     }
 };
 

@@ -46,6 +46,13 @@ function resetCanvas() {
     gameTime = 0;
 	
     currentSpeed = 0;
+    
+    gameSpeeds = [
+               {name:"Normal", mult:1.2},
+               {name:"Slow", mult:0.3},
+               {name:"Fast", mult:3},
+               {name:"Paused", mult:0}
+    ];    
 	
 	clearInterval(movement);
 	clearInterval(drawGameInterval);
