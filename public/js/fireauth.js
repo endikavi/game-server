@@ -98,6 +98,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
     console.log(user);
+	console.log(user.uid)
   } else {
     // User is signed out.
     console.log('Usuario desconectado');
