@@ -97,8 +97,11 @@ firebase.auth().sendPasswordResetEmail(email).then(function() {
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
+	console.log('Usuario conectado');
     console.log(user);
 	console.log(user.uid)
+	console.log(user.displayName)
+	
   } else {
     // User is signed out.
     console.log('Usuario desconectado');
