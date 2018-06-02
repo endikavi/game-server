@@ -43,8 +43,29 @@ var objectTypes = {
 		zIndex : 1
 	},
     7 : {
-		name : "cpc",
+		name : "Liriel",
 		sprite : new Sprite(playerTwoTileset,[{x:0,y:640,w:64,h:64}]),
+		offset : [-13,-27],
+		collision : objectCollision.solid,
+		zIndex : 1
+	},
+    8 : {
+		name : "Armaus",
+		sprite : new Sprite(playerThreeTileset,[{x:0,y:640,w:64,h:64}]),
+		offset : [-13,-27],
+		collision : objectCollision.solid,
+		zIndex : 1
+	},
+    9 : {
+		name : "Lindy",
+		sprite : new Sprite(playerFourTileset,[{x:0,y:640,w:64,h:64}]),
+		offset : [-13,-27],
+		collision : objectCollision.solid,
+		zIndex : 1
+	},
+    10 : {
+		name : "Lindy",
+		sprite : new Sprite(playerTileset,[{x:0,y:640,w:64,h:64}]),
 		offset : [-13,-27],
 		collision : objectCollision.solid,
 		zIndex : 1
@@ -61,6 +82,8 @@ function MapObject(dat) {
 	this.type	= dat.nt || 0;
 	this.offset	= [0,0];
 	this.sprite = undefined;
+	this.Tileset = undefined;
+	this.mapId = undefined;
 	this.direction = "d";
 	
 }
@@ -109,7 +132,7 @@ MapObject.prototype.processMovement = function() {
 		
 		if(this.direction == "u"){
 
-			o.sprite = new Sprite(playerTwoTileset,[
+			o.sprite = new Sprite(this.Tileset,[
 				{x:0,y:512,w:64,h:64},
 				{x:64,y:512,w:64,h:64},
 				{x:128,y:512,w:64,h:64},
@@ -125,7 +148,7 @@ MapObject.prototype.processMovement = function() {
 		
 		if(this.direction == "r"){
 
-			o.sprite = new Sprite(playerTwoTileset,[
+			this.sprite = new Sprite(this.Tileset,[
 				{x:0,y:704,w:64,h:64},
 				{x:64,y:704,w:64,h:64},
 				{x:128,y:704,w:64,h:64},
@@ -141,7 +164,7 @@ MapObject.prototype.processMovement = function() {
 		
 		if(this.direction == "d"){
 
-			o.sprite = new Sprite(playerTwoTileset,[
+			this.sprite = new Sprite(this.Tileset,[
 				{x:0,y:640,w:64,h:64},
 				{x:64,y:640,w:64,h:64},
 				{x:128,y:640,w:64,h:64},
@@ -157,7 +180,7 @@ MapObject.prototype.processMovement = function() {
 		
 		if(this.direction == "l"){
 
-			o.sprite = new Sprite(playerTwoTileset,[
+			this.sprite = new Sprite(this.Tileset,[
 				{x:0,y:576,w:64,h:64},
 				{x:64,y:576,w:64,h:64},
 				{x:128,y:576,w:64,h:64},
@@ -172,10 +195,10 @@ MapObject.prototype.processMovement = function() {
 		}
 		
 	}else if(this.name == "coop"){
-		if(this.direction == "u"){this.sprite = new Sprite(playerTwoTileset,[{x:0,y:512,w:64,h:64}])}
-		if(this.direction == "r"){this.sprite = new Sprite(playerTwoTileset,[{x:0,y:704,w:64,h:64}])}
-		if(this.direction == "d"){this.sprite = new Sprite(playerTwoTileset,[{x:0,y:640,w:64,h:64}])}
-		if(this.direction == "l"){this.sprite = new Sprite(playerTwoTileset,[{x:0,y:576,w:64,h:64}])}
+		if(this.direction == "u"){this.sprite = new Sprite(this.Tileset,[{x:0,y:512,w:64,h:64}])}
+		if(this.direction == "r"){this.sprite = new Sprite(this.Tileset,[{x:0,y:704,w:64,h:64}])}
+		if(this.direction == "d"){this.sprite = new Sprite(this.Tileset,[{x:0,y:640,w:64,h:64}])}
+		if(this.direction == "l"){this.sprite = new Sprite(this.Tileset,[{x:0,y:576,w:64,h:64}])}
 	}
 	if(this.offset[0] > 0.5 ) {
 		this.offset[0]-=(this.offset[0]/framesLastSecond)*3.5

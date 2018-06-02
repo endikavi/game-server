@@ -131,7 +131,8 @@ var UserConf = [
             saves: true,
             opac: 50,
             sens: 50, 
-            
+            multiplayerCharacter: 10,
+			
         },
                 
         {

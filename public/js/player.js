@@ -18,6 +18,8 @@ function Character() {
 	this.direction	= directions.right;
 	this.sprites = {};
 	
+	this.tileset = playerTileset;
+	
 	this.inventory = new Inventory(4);
     
     this.stopSprites();
@@ -26,16 +28,16 @@ function Character() {
 
 Character.prototype.stopSprites = function() {
     
-            this.sprites[directions.up]		= new Sprite(playerTileset,[{x:0,y:512,w:64,h:64}]);
-            this.sprites[directions.right]	= new Sprite(playerTileset,[{x:0,y:704,w:64,h:64}]);
-            this.sprites[directions.down]	= new Sprite(playerTileset,[{x:0,y:640,w:64,h:64}]);
-            this.sprites[directions.left]	= new Sprite(playerTileset,[{x:0,y:576,w:64,h:64}]);
+            this.sprites[directions.up]		= new Sprite(this.tileset,[{x:0,y:512,w:64,h:64}]);
+            this.sprites[directions.right]	= new Sprite(this.tileset,[{x:0,y:704,w:64,h:64}]);
+            this.sprites[directions.down]	= new Sprite(this.tileset,[{x:0,y:640,w:64,h:64}]);
+            this.sprites[directions.left]	= new Sprite(this.tileset,[{x:0,y:576,w:64,h:64}]);
     
 }
 
 Character.prototype.startSprites = function() {
     
-    this.sprites[directions.up]		= new Sprite(playerTileset,[
+    this.sprites[directions.up]		= new Sprite(this.tileset,[
         
         {x:0,y:512,w:64,h:64},
         {x:64,y:512,w:64,h:64},
@@ -49,7 +51,7 @@ Character.prototype.startSprites = function() {
         
     ]);
     
-	this.sprites[directions.right]	= new Sprite(playerTileset,[
+	this.sprites[directions.right]	= new Sprite(this.tileset,[
         
         {x:0,y:704,w:64,h:64},
         {x:64,y:704,w:64,h:64},
@@ -62,7 +64,7 @@ Character.prototype.startSprites = function() {
         {x:512,y:704,w:64,h:64}
         
     ]);
-	this.sprites[directions.down]	= new Sprite(playerTileset,[
+	this.sprites[directions.down]	= new Sprite(this.tileset,[
         
         {x:0,y:640,w:64,h:64},
         {x:64,y:640,w:64,h:64},
@@ -76,7 +78,7 @@ Character.prototype.startSprites = function() {
         
     ]);
     
-	this.sprites[directions.left]	= new Sprite(playerTileset,[
+	this.sprites[directions.left]	= new Sprite(this.tileset,[
         
         {x:0,y:576,w:64,h:64},
         {x:64,y:576,w:64,h:64},
@@ -163,8 +165,6 @@ Character.prototype.canMoveTo = function(d, x, y) {
     
 	if(typeof this.delayMove[tileTypes[mapTileData.map[toIndex(x,y)].type].floor]=='undefined') {
         
-        hitSound.play();
-        //console.log('Pared');
         return false; 
         
     }
@@ -174,9 +174,7 @@ Character.prototype.canMoveTo = function(d, x, y) {
 		var o = mapTileData.map[toIndex(x,y)].object;
         
 		if(objectTypes[o.type].collision==objectCollision.solid){
-            
-            hitSound.play();
-            //console.log('Bloque inamovible');
+
 			return false;
             
 		}else if(objectTypes[o.type].collision==objectCollision.push) {
@@ -192,14 +190,11 @@ Character.prototype.canMoveTo = function(d, x, y) {
                 }
 				
 			}
-			
-			hitSound.play();
-			//console.log('Bloque movible');
+
             return false;
             
         }
 	}
-    		//console.log('Moviendose');
 	
 			this.startSprites();
             pasoscount ++;

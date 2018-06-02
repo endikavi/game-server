@@ -220,10 +220,9 @@ function drawGame() {
 		xe = viewport.endTile[0];
 		
 		ctx1.clearRect(0, 0, viewport.screen[0], viewport.screen[1]);
-		
-		if(mapTileData.preLoaded == true){
+		ctx.fillRect(0, 0, viewport.screen[0], viewport.screen[1]);
+		if(mapTileData.preLoaded){
 				
-				ctx.fillRect(0, 0, viewport.screen[0], viewport.screen[1]);
 				ctx.drawImage(mapTileData.prem,-viewport.offset[0],-viewport.offset[1], viewport.screen[0], viewport.screen[1], 0, 0, viewport.screen[0], viewport.screen[1]);
 
 		}
@@ -236,7 +235,7 @@ function drawGame() {
 
 				mapTileNow = mapTileData.map[toIndex(x,y)];
 					
-				if(z==0 && mapTileData.preLoaded == false){
+				if(z==0 && !mapTileData.preLoaded){
 					
 					tileTypes[mapTileNow.type].sprite.draw(
 						gameTime,
@@ -321,7 +320,7 @@ function drawGame() {
 			}
 		}
 	}
-		
+	
 	if(sec!=currentSecond) {
 		
 		currentSecond = sec;

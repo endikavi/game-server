@@ -17,6 +17,10 @@ var charlieTileset = new Tileset("img/charliechar.png");
 
 var playerTwoTileset = new Tileset("img/player2.png");
 
+var playerThreeTileset = new Tileset("img/player3.png");
+
+var playerFourTileset = new Tileset("img/player4.png");
+
 function Tileset(src){
 	
 	this.T = new Image();

@@ -2,7 +2,9 @@ var socket;
 var multiplayerOn;
 var chats = {};
 var players = {};
+var coop = {};
 var rooms = {};
+coop.list ={};
 rooms.list ={};
 chats.room = [];
 chats.global = [];
@@ -16,27 +18,36 @@ function multiplayer(){
     socket = io("https://gioserver.herokuapp.com",{transports:["websocket"], forceNew: true });
     
     socket.emit('id', UserConf[1].multiplayerid);
-    
+    socket.emit('set', UserConf[1].multiplayerCharacter);
     socket.on('walking', function(msg){
-        
-        var o = players.list[msg[0]].character;
        
         if(msg[0] != UserConf[1].multiplayerid){
-            
-            if( o == undefined ){
-
-                console.log('creando avatar para jugador ' + msg[0] );
-                players.list[msg[0]].character = new MapObject({name:"coop",info:false,nt:7});
-                o = players.list[msg[0]].character;
-            }
-            
-            o.objectCanMoveTo(msg[1], msg[2]);
-            o.direction = msg[3];
-            if(msg[3]=="u"){o.offset[1]+=40}
-            if(msg[3]=="d"){o.offset[1]-=40}
-            if(msg[3]=="l"){o.offset[0]+=40}
-            if(msg[3]=="r"){o.offset[0]-=40}
-            
+			
+			var o = coop.list[msg[0]];
+			
+            if(o.mapId == mapId){
+				
+				if( o.character == undefined || o.character == null ){
+					
+                	coop.list[msg[0]].character = new MapObject({name:"coop",info:false,nt:players.list[msg[0]].set});
+					if(o.number == 7){o.character.Tileset=playerTwoTileset}
+					if(o.number == 8){o.character.Tileset=playerThreeTileset}
+					if(o.number == 9){o.character.Tileset=playerFourTileset}
+					if(o.number == 10){o.character.Tileset=playerFourTileset}
+				}
+				
+				o.character.objectCanMoveTo(msg[1], msg[2]);
+				o.character.direction = msg[3];
+				if(msg[3]=="u"){o.character.offset[1]+=40}
+				if(msg[3]=="d"){o.character.offset[1]-=40}
+				if(msg[3]=="l"){o.character.offset[0]+=40}
+				if(msg[3]=="r"){o.character.offset[0]-=40}
+				
+			}else{
+				
+				o.character = null
+				
+			}
         }
         
     })
@@ -54,6 +65,13 @@ function multiplayer(){
 
 		}  
         
+    })
+	
+	socket.on('changeMap', function(msg){
+		
+        coop.list[msg[0]].mapId = msg[1];
+        coop.list[msg[0]].character = null;
+		
     })
 	
 	socket.on('playersList', function(msg){
