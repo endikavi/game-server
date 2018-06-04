@@ -56,8 +56,9 @@ function setMap() {
 }
 
 function changeMap(id){
-	
-		socket.emit('changeMap',id);
+		if (multiplayerOn) {
+			socket.emit('changeMap',id);
+		}
 		ctx.clearRect(0, 0, viewport.screen[0], viewport.screen[1]);
 		ctx1.clearRect(0, 0, viewport.screen[0], viewport.screen[1]);
 		ctx2.clearRect(0, 0, viewport.screen[0], viewport.screen[1]);

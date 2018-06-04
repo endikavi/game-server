@@ -65,7 +65,7 @@ var objectTypes = {
 	},
     10 : {
 		name : "Lindy",
-		sprite : new Sprite(playerTileset,[{x:0,y:640,w:64,h:64}]),
+		sprite : new Sprite(charlieTileset,[{x:0,y:640,w:64,h:64}]),
 		offset : [-13,-27],
 		collision : objectCollision.solid,
 		zIndex : 1
@@ -82,7 +82,7 @@ function MapObject(dat) {
 	this.type	= dat.nt || 0;
 	this.offset	= [0,0];
 	this.sprite = undefined;
-	this.Tileset = undefined;
+	this.Tileset = charlieTileset;
 	this.mapId = undefined;
 	this.direction = "d";
 	
@@ -132,7 +132,7 @@ MapObject.prototype.processMovement = function() {
 		
 		if(this.direction == "u"){
 
-			o.sprite = new Sprite(this.Tileset,[
+			this.sprite = new Sprite(this.Tileset,[
 				{x:0,y:512,w:64,h:64},
 				{x:64,y:512,w:64,h:64},
 				{x:128,y:512,w:64,h:64},

@@ -15,8 +15,14 @@ function addControlls() {
 
 function addControllsL0() {
     
-    $$('#controlls-box').html('<div class="container styck"><div class="circley" id="styck"></div></div><div class="action-box" id="action"></div></div>')
+    $$('#controlls-box').html('<div class="container styck"><div class="circley" id="styck"></div></div><div class="action-box" id="action"></div></div><div id="ingameChat"></div>')
     
+	$$("#ingameChat").click(function(){
+		if (multiplayerOn) {
+			seeRoomChat()
+		}
+	})
+	
     document.getElementById("action").addEventListener("touchstart",function() {keysDown[80] = true; this.style.backgroundColor =""});
 
     document.getElementById("action").addEventListener("touchend",function() {keysDown[80] = false; this.style.backgroundColor =""});
@@ -33,7 +39,13 @@ function addControllsL0() {
 
 function addControllsL1() {
     
-    $$('#controlls-box').html('<div class="container left"><div class="circle" id="left"></div></div><div class="container right"><div class="circle" id="right"></div></div><div class="container up"><div class="circle" id="up"></div></div><div class="container down"><div class="circle" id="down"></div></div><div class="container action"><div class="circle-action" id="action"></div></div>')
+    $$('#controlls-box').html('<div class="container left"><div class="circle" id="left"></div></div><div class="container right"><div class="circle" id="right"></div></div><div class="container up"><div class="circle" id="up"></div></div><div class="container down"><div class="circle" id="down"></div></div><div class="container action"><div class="circle-action" id="action"></div></div><div id="ingameChat"></div>')
+	
+	$$("#ingameChat").click(function(){
+		if (multiplayerOn) {
+			seeRoomChat()
+		}
+	})
 	
     $$('#left').css('opacity', UserConf[0].opac/100);
     $$('#up').css('opacity', UserConf[0].opac/100);

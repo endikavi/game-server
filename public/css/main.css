@@ -1,7 +1,19 @@
 .card{
     
     position: relative;
-    z-index: 2;
+    z-index: 6;
+    
+}
+
+#ingameChat{
+    
+    position: absolute;
+	width: 7%;
+	height: 10%;
+	top: 0px;
+	left:75%;
+	background: red;
+    z-index: 7;
     
 }
 
