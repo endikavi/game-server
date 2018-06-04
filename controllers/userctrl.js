@@ -53,7 +53,7 @@ exports.updateUserSavedata = (req, res) => {
 	console.log('Intento de actualizar partida');
     console.log(req.body);
     
-	const Update = ({ UserConf: req.body.UserConf });
+	const Update = ({ UserConf: JSON.parse(req.body.UserConf) });
 
 	User.update({ uid: req.body.uid }, Update, function (err) {
         
@@ -100,7 +100,7 @@ exports.getUserSavedata = (req, res) => {
 		console.log('SaveData obtenido');
         if (users.length > 0){
 		res.send(users[0].UserConf);
-        }
+        }else{res.send(false)}
 	})
     
 }
