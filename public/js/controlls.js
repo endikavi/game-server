@@ -22,31 +22,32 @@ function addControllsL0() {
 			seeRoomChat()
 		}
 	})
-	
+	$$('#ingameChat').css('opacity', UserConf[0].opac/100);
     document.getElementById("action").addEventListener("touchstart",function() {keysDown[80] = true; this.style.backgroundColor =""});
 
     document.getElementById("action").addEventListener("touchend",function() {keysDown[80] = false; this.style.backgroundColor =""});
     
     document.removeEventListener("backbutton", exitFromApp, false);
     document.addEventListener("backbutton", mainMenu, false);
-	
-	joystick = new VirtualJoystick({mouseSupport: true})
+    
     if (!pc){
+        joystick = new VirtualJoystick({mouseSupport: true})
         document.removeEventListener("backbutton", exitFromApp, false);
         document.addEventListener("backbutton", mainMenu, false);
-    }
+    }else{joystick = new VirtualJoystick({mouseSupport: false})}
 }
 
 function addControllsL1() {
     
     $$('#controlls-box').html('<div class="container left"><div class="circle" id="left"></div></div><div class="container right"><div class="circle" id="right"></div></div><div class="container up"><div class="circle" id="up"></div></div><div class="container down"><div class="circle" id="down"></div></div><div class="container action"><div class="circle-action" id="action"></div></div><div id="ingameChat"></div>')
-	
+	joystick = new VirtualJoystick({container: document.getElementById("action")});
 	$$("#ingameChat").click(function(){
 		if (multiplayerOn) {
 			seeRoomChat()
 		}
 	})
 	
+    $$('#ingameChat').css('opacity', UserConf[0].opac/100);
     $$('#left').css('opacity', UserConf[0].opac/100);
     $$('#up').css('opacity', UserConf[0].opac/100);
     $$('#down').css('opacity', UserConf[0].opac/100);
@@ -87,7 +88,7 @@ function addControllsR1() {
     
     
 }
-
+var joystick;
 var ind = 0;
 var maxind;
 var interval;
@@ -110,7 +111,7 @@ function addControllsForInfo(nam,inf) {
             for (s = 0; s < 2; s++){
 
                 if (ind >= maxind){
-
+					keysDown[80] = false;
                     clearInterval(interval);
                     return;
 
@@ -128,16 +129,6 @@ function addControllsForInfo(nam,inf) {
    	document.getElementById('msg-box').addEventListener("touchend",function() {keysDown[80] = false;});
     
 }
-
-var joystick = {
-	
-	deltaY(){ return 0},
-	deltaX(){ return 0},
-	up(){ return 0},
-	down(){ return 0},
-	right(){ return 0},
-	left(){ return 0}
-};
 
 var directions = {
 	

@@ -96,49 +96,16 @@ function renderGame() {
 	populateMap();
 	preRender = setInterval(function (){
             preLoadSprites();
-            mapTileData.preLoad();
+            if(UserConf[0].preRender){
+                mapTileData.preLoad();
+            }
 			clearInterval(preRender)
     },0);
 	
 	if(UserConf[0].performance){
         drawGameInterval = setInterval(drawGame,0)
-        if(UserConf[0].fps==1000/30){
-            if(pc){
-                gameSpeeds = [
-                   {name:"Normal", mult:0.3},
-                   {name:"Slow", mult:0.3},
-                   {name:"Fast", mult:3},
-                   {name:"Paused", mult:0}
-                ];                  
-            }else{
-                gameSpeeds = [
-                   {name:"Normal", mult:0.4},
-                   {name:"Slow", mult:0.3},
-                   {name:"Fast", mult:3},
-                   {name:"Paused", mult:0}
-                ];       
-            }
-        }
     }else{
         requestAnimationFrame(drawGame);
-        requestAnimationFrame(gameControlls);
-        if(UserConf[0].fps==1000/30){
-            if(pc){
-                gameSpeeds = [
-                   {name:"Normal", mult:0.6},
-                   {name:"Slow", mult:0.3},
-                   {name:"Fast", mult:3},
-                   {name:"Paused", mult:0}
-                ];                  
-            }else{
-                gameSpeeds = [
-                   {name:"Normal", mult:0.7},
-                   {name:"Slow", mult:0.3},
-                   {name:"Fast", mult:3},
-                   {name:"Paused", mult:0}
-                ];                  
-            }               
-        }
     }
 };
 
@@ -187,9 +154,7 @@ function gameControlls(){
 			player.pickUp();
 			
 		}
-        if(!UserConf[0].performance){
-            requestAnimationFrame(gameControlls);
-        }
+
 }
 
 function drawGame() {
@@ -200,13 +165,18 @@ function drawGame() {
 		
 	currentFrameTime = Date.now();
 	now = currentFrameTime;
-	timeElapsed = currentFrameTime - lastFrameTime;
-	gameTime+= Math.floor(timeElapsed * gameSpeeds[currentSpeed].mult);
+	
 	sec = Math.floor(Date.now()/1000);
     elapsed = now - then;
 	
 	if (elapsed > fpsInterval) {
-
+        
+        timeElapsed = currentFrameTime - lastFrameTime;
+        
+        gameTime+= Math.floor(timeElapsed * gameSpeeds[currentSpeed].mult);
+        
+        gameControlls();
+        
         then = now - (elapsed % fpsInterval);
 
 		viewport.update(player.position[0] + (player.dimensions[0]/2),player.position[1] + (player.dimensions[1]/2));

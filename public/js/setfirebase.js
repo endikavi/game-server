@@ -15,7 +15,13 @@ firebase.initializeApp(fireconfig);
 
 //funcion para cambiar el display name
 function updateName(name){
+    
 	UserConf[1].username=name
+    
+    if(UserConf[0].saves && firebase.auth().currentUser){
+        ajaxcall("patch");
+    }
+    
 	firebase.auth().currentUser.updateProfile({
      	displayName: name
 	})
@@ -34,7 +40,13 @@ firebase.auth().onAuthStateChanged(function(user) {
 		if (UserConf[0].online) {
 			multiplayer();
 		}
-		  
+        
+        if(UserConf[0].saves){
+            ajaxcall("get");
+        }
+        
+        seven.loginScreen.close('.login-screen');
+        
 	} else {
 		// User is signed out.
 		console.log('Usuario desconectado');
@@ -46,5 +58,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 //funcion para salir de la cuenta
 function logOut(){
-firebase.auth().signOut(); 
+    firebase.auth().signOut();
+    socket.disconnect();
+    multiplayerOn = false;
 }

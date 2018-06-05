@@ -44,9 +44,13 @@ function ajaxcall(method){
 
             if(method == "get"){
                 
-                console.log('partida recogida de la nube');
 				console.log(res);
-                UserConf = res;
+                if(res){
+                    console.log('partida recogida de la nube');
+                    UserConf = JSON.parse(res);
+                }else{
+                    ajaxcall("post")
+                }
         
             }else if(method == "post"){
         

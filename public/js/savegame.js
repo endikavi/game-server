@@ -4,7 +4,7 @@ var pc = true;
 function appInit(){
 	
     pc = false;
-    
+    UserConf[1].mobileid = device.uuid
 	userdata=localStorage.getItem('savedata');
     userdata=JSON.parse(userdata);
     
@@ -50,7 +50,7 @@ function pcInit(){
 		
     }else{
         
-        UserConf[1].mobileid = "pc"+Date.now()
+        UserConf[1].mobileid = undefined
     
         UserConf[1].mobileinfo = {}
         
@@ -120,18 +120,20 @@ var UserConf = [
     
         {
         
-            controlls: 1,
+            controlls: 0,
+			volume:50,
             music: true,
             vibrate: true,
-			performance: true,
-            fps: 60,
+			performance: false,
+            preRender: false,
+            fps: 1000/60,
 			resolutionX: 800,
 			resolutionY: 450,
             online: true,
-            saves: true,
+            saves: false,
             opac: 50,
             sens: 50, 
-            multiplayerCharacter: 10,
+            multiplayerCharacter: 11,
 			
         },
                 

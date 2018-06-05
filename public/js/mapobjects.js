@@ -64,12 +64,20 @@ var objectTypes = {
 		zIndex : 1
 	},
     10 : {
-		name : "Lindy",
+		name : "Charlie",
 		sprite : new Sprite(charlieTileset,[{x:0,y:640,w:64,h:64}]),
 		offset : [-13,-27],
 		collision : objectCollision.solid,
 		zIndex : 1
+	},
+    11 : {
+		name : "Pepe",
+		sprite : new Sprite(playerTileset,[{x:0,y:640,w:64,h:64}]),
+		offset : [-13,-27],
+		collision : objectCollision.solid,
+		zIndex : 1
 	}
+    
 };
 
 function MapObject(dat) {
@@ -113,7 +121,7 @@ if(this.info!=false && this.talking >= 0){
 		this.talking++ 
 
 	}else{
-
+		keysDown[80] = false;
 		document.getElementById('msg-box').removeEventListener("touchstart",function() {keysDown[80] = true;});
 		document.getElementById('msg-box').removeEventListener("touchend",function() {keysDown[80] = false;});
 		addControlls();

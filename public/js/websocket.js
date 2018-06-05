@@ -20,7 +20,7 @@ function multiplayer(){
 		socket = io("https://gioserver.herokuapp.com",{transports:["websocket"], forceNew: true });
 
 		socket.emit('id', UserConf[1].multiplayerid);
-		socket.emit('set', UserConf[1].multiplayerCharacter);
+		socket.emit('set', UserConf[0].multiplayerCharacter);
 		socket.on('walking', function(msg){
 
 			if(msg[0] != UserConf[1].multiplayerid){
@@ -37,6 +37,7 @@ function multiplayer(){
 						if(players.list[msg[0]].set == 8){o.character.Tileset=playerThreeTileset}
 						if(players.list[msg[0]].set == 9){o.character.Tileset=playerFourTileset}
 						if(players.list[msg[0]].set == 10){o.character.Tileset=charlieTileset}
+                        if(players.list[msg[0]].set == 11){o.character.Tileset=playerTileset}
 						if(o.character.Tileset == undefined){o.character.Tileset=charlieTileset}
 					}
 
@@ -49,7 +50,8 @@ function multiplayer(){
 
 				}else{
 
-					o.character = new MapObject({name:"coop",info:false,nt:players.list[msg[0]].set || 10});
+					mapTileData.map[toIndex(o.character.x, o.character.y)].object = null;
+					o.character = undefined;
 
 				}
 			}
@@ -77,7 +79,8 @@ function multiplayer(){
 					coop.list[msg[0]] = {};
 			}
 			coop.list[msg[0]].mapId = msg[1];
-			coop.list[msg[0]].character = new MapObject({name:"coop",info:false,nt:players.list[msg[0]].set || 10});
+			mapTileData.map[toIndex(coop.list[msg[0]].character.x, coop.list[msg[0]].character.y)].object = null;
+			coop.list[msg[0]].character = undefined;
 
 		})
 

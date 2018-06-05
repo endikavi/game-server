@@ -42,7 +42,7 @@ function resetCanvas() {
     currentSecond = 0, frameCount = 0, framesLastSecond = 0, lastFrameTime = 0;
 
     tilesetLoaded = false;
-
+    joystick = undefined;
     gameTime = 0;
     currentSpeed = 0;
     

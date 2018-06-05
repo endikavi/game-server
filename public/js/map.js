@@ -70,7 +70,9 @@ function changeMap(id){
         populateMap();
         preRender = setInterval(function (){
             preLoadSprites();
-            mapTileData.preLoad();
+            if(UserConf[0].preRender){
+                mapTileData.preLoad();
+            }
 			clearInterval(preRender) 
         },0);
 

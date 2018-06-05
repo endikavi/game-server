@@ -14,6 +14,7 @@ function sound(loop,src) {
 	
     this.play = function() {
         if(UserConf[0].music==true){
+			this.sound.volume=UserConf[0].volume
             this.sound.src = src;
             this.sound.load();
             this.sound.play().catch(function(error) {});
