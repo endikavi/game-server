@@ -10,17 +10,17 @@ const urlencodedParser = bodyParser.urlencoded({extended: false})
 
 //endika_aeg // f*****234 //conexion a la base de datos
 
-const mongoose = require('mongoose');
-const mongodbRoute = 'mongodb://game-server:game-server@ds155299.mlab.com:55299/game-db';
+//const mongoose = require('mongoose');
+//const mongodbRoute = 'mongodb://game-server:game-server@ds155299.mlab.com:55299/game-db';
 const port = process.env.PORT || 3001;
-const mongodbOptions = {
+/*const mongodbOptions = {
     socketTimeoutMS: 0,
     keepAlive: true,
     reconnectTries: 30,
 	useMongoClient: true
-};
+};*/
 
-mongoose.Promise = global.Promise
+/*mongoose.Promise = global.Promise
 const db = mongoose.connect(mongodbRoute, mongodbOptions, (err) => {
     if (err) {
         return console.log(`Error al conectar a la base de datos: ${err}`)
@@ -29,7 +29,7 @@ const db = mongoose.connect(mongodbRoute, mongodbOptions, (err) => {
         console.log(`Servidor up en ${port}`);
     });
     console.log(`Conexión a mongo correcta.`)
-});
+});*/
 
 //Rutas del servidor
 
